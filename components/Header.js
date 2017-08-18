@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import { colors, dimensions } from '../styles/Variables';
 
-export default class App extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <View style={styles.header}>
