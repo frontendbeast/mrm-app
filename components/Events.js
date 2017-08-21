@@ -17,8 +17,9 @@
         const events = [];
 
         for (let key in this.props.events.data) {
-          let event = this.props.events.data[key];
-          event.venue = this.props.venues.data[event.venue];
+          let event = {...this.props.events.data[key]};
+          event.venue = {...this.props.venues.data[event.venue]};
+
           events.push(event);
         }
 
