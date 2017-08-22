@@ -10,14 +10,36 @@ const cache = {
       if (cached) {
         resolve(JSON.parse(cached));
       } else {
-        database.ref(`/${node}`).once('value', snap => {
-          AsyncStorage.setItem(node, JSON.stringify(snap.val()));
-          resolve(snap.val());
-        })
-        .catch((error) => {
-          console.log(`error ${error}`);
-          reject(error);
-        });
+        database
+          .getEntries({content_type: node.slice(0, -1)})
+          .then(results => {
+            let items = {};
+
+            results.items.forEach((item) => {
+              let object = {
+                ...item.fields
+              };
+
+              Object.entries(object).forEach(([key, value]) => {
+                if (value.sys) {
+                  results.includes.Entry.forEach((include) => {
+                    if (value.sys.id == include.sys.id) {
+                      object[key] = include.fields;
+                    }
+                  });
+                }
+              });
+
+              items[item.sys.id] = object;
+            });
+
+            AsyncStorage.setItem(node, JSON.stringify(items));
+            resolve(items);
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
       }
     });
   }

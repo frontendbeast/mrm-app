@@ -1,9 +1,8 @@
-import * as firebase from 'firebase';
+import { createClient } from 'contentful';
 
-firebase.initializeApp({
-  databaseURL: 'https://mrm-app.firebaseio.com/',
+const database = createClient({
+  space: 'XXX',
+  accessToken: 'XXX'
 });
-
-const database = firebase.database();
 
 export default database;

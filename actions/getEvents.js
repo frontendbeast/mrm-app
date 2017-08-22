@@ -7,10 +7,10 @@ export function getEvents() {
 
     return cache
       .get('events')
-      .then((results) => {
+      .then(results => {
         dispatch(getEventsFulfilledAction(results));
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         dispatch(getEventsRejectedAction());
       });
