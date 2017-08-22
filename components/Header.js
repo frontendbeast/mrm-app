@@ -3,8 +3,6 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import PropTypes from 'prop-types';
-
 import { colors, dimensions } from '../styles/Variables';
 
 const Header = ({ openDrawer, title }) => (
@@ -16,12 +14,6 @@ const Header = ({ openDrawer, title }) => (
     <View style={styles.headerSpacer} />
   </View>
 );
-
-Header.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired,
-  loginScreen: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = state => ({  });
 
