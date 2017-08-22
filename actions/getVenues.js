@@ -1,17 +1,19 @@
 import actionTypes from '../constants/actionTypes';
-import database from '../data/database';
+import cache from '../data/cache';
 
 export function getVenues() {
   return dispatch => {
     dispatch(getVenuesRequestedAction());
-    return database.ref('/venues').once('value', snap => {
-      const venues = snap.val();
-      dispatch(getVenuesFulfilledAction(venues));
-    })
-    .catch((error) => {
-      console.log(error);
-      dispatch(getVenuesRejectedAction());
-    });
+
+    return cache
+      .get('venues')
+      .then((results) => {
+        dispatch(getVenuesFulfilledAction(results));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(getVenuesRejectedAction());
+      });
   };
 }
 
