@@ -1,38 +1,30 @@
 {
-  "name": "mrm-app",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "ajv": "^5.2.2",
-    "babel-eslint": "^7.2.3",
-    "husky": "^0.14.3",
-    "jest-expo": "~19.0.0",
-    "prettier-eslint": "^6.4.2",
-    "react-native-scripts": "1.1.0",
-    "react-test-renderer": "16.0.0-alpha.12",
-    "validate-commit-msg": "^2.14.0"
-  },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-  "scripts": {
-    "commitmsg": "validate-commit-msg",
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "dependencies": {
-    "contentful": "^4.6.1",
-    "expo": "^19.0.0",
-    "moment": "^2.18.1",
-    "prop-types": "^15.5.10",
-    "react": "16.0.0-alpha.12",
-    "react-native": "^0.46.1",
-    "react-navigation": "^1.0.0-beta.11",
-    "react-redux": "^5.0.6",
-    "redux-thunk": "^2.2.0"
-  }
+	"name": "MRMApp",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest"
+	},
+	"dependencies": {
+		"contentful": "^4.6.1",
+		"expo": "^19.0.0",
+		"moment": "^2.18.1",
+		"prop-types": "^15.5.10",
+		"react-native": "0.47.2",
+		"react-navigation": "^1.0.0-beta.11",
+		"react-redux": "^5.0.6",
+		"react": "16.0.0-alpha.12",
+		"redux-thunk": "^2.2.0",
+		"redux": "^3.7.2"
+	},
+	"devDependencies": {
+		"babel-jest": "20.0.3",
+		"babel-preset-react-native": "3.0.1",
+		"jest": "20.0.4",
+		"react-test-renderer": "16.0.0-alpha.12"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
 }

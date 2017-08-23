@@ -33,9 +33,7 @@ const styles = {
   },
   headerNavButton: {
     alignSelf: 'flex-start',
-    color: '#f00',
     flex: 1,
-    fontSize: 16,
   },
   headerSpacer: {
     alignSelf: 'flex-end',

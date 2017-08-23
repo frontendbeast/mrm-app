@@ -3,7 +3,7 @@ const pallete = {
   red: '#b81a1b',
   white: '#fff',
   yellow: '#fd0',
-}; 
+};
 
 export const colors = {
   primary: pallete.yellow,

@@ -18,7 +18,7 @@ export default class Events extends React.Component {
     return (
       <View>
         {Object.entries(events.data).map(([id, event]) => {
-          return <Text>{ event.name }, { event.venue.name } @ { Moment(event.date).format('ha') }</Text>;
+          return <Text key={id}>{ event.name }, { event.venue.name } @ { Moment(event.date).format('ha') }</Text>;
         })}
       </View>
     );
