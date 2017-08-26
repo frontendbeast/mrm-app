@@ -6,7 +6,7 @@ export function getEvents() {
     dispatch(getEventsRequestedAction());
 
     return cache
-      .get('events')
+      .getAll('events')
       .then(results => {
         dispatch(getEventsFulfilledAction(results));
       })
