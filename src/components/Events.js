@@ -3,6 +3,9 @@ import Moment from 'moment';
 
 import { Text, View } from 'react-native';
 
+import { dimensions } from '../styles/Variables';
+import globalStyles from '../styles/Styles';
+
 export default class Events extends React.Component {
   componentWillMount() {
     this.props.onGetEvents();
@@ -15,12 +18,32 @@ export default class Events extends React.Component {
       return null;
     }
 
+    const items = Object
+      .entries(events.data)
+      .map(([id, event]) => { return { ...event, id: id }; })
+      .sort((a, b) => { return Date.parse(b.date) - Date.parse(a.date); });
+
     return (
-      <View>
-        {Object.entries(events.data).map(([id, event]) => {
-          return <Text key={id}>{ event.name }, { event.venue.name } @ { Moment(event.date).format('ha') }</Text>;
+      <View style={globalStyles.container}>
+        {items.map((event) => {
+          return (
+            <View key={event.id} style={styles.event}>
+              <Text style={styles.heading}>{ event.name }</Text>
+              <Text>{ Moment(event.date).format('ha') } @ { event.venue.name }</Text>
+            </View>
+          );
         })}
       </View>
     );
   }
 }
+
+const styles = {
+  event: {
+    marginBottom: dimensions.gutter,
+  },
+  heading: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  }
+};
