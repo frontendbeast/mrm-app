@@ -11,7 +11,8 @@ const pagesReducer = (state = {}, action) => {
       return merge({}, state, { error: 'Error getting pages', loading: false });
     }
     case actionTypes.GetPagesFulfilled: {
-      return merge({}, state, { data: action.pages, error: false, loading: false });
+      const merged =  merge({}, state, { error: false, loading: false });
+      return { ...merged, data: action.pages };
     }
     case actionTypes.GetPageByTitleRequested: {
       return merge({}, state, { loading: true });

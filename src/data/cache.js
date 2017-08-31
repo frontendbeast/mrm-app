@@ -5,6 +5,30 @@ import { merge, pickBy } from 'lodash';
 import database from './database';
 
 const cache = {
+  clear: async (node, field, value) => {
+    const contentType = node.slice(0, -1);
+    const cached = await AsyncStorage.getItem(contentType);
+
+    let results = (cached && field && value) ? JSON.parse(cached) : {};
+
+    if (field && value) {
+      Object.entries(results).forEach(([id, item]) => {
+        if (item[field] === value) {
+          delete results[id];
+        }
+      });
+    }
+
+    return new Promise(async(resolve, reject) => {
+      if (Object.keys(results).length) {
+        await AsyncStorage.setItem(contentType, JSON.stringify(results));
+      } else {
+        await AsyncStorage.removeItem(contentType);
+      }
+      resolve();
+    });
+  },
+
   getByAttribute: async (node, field, value, limit) => {
     const fieldName = `fields.${field}`;
 

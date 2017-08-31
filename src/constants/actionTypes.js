@@ -1,4 +1,8 @@
 const actionTypes = {
+  ClearCacheRequested: 'CLEAR_CACHE_REQUESTED',
+  ClearCacheRejected: 'CLEAR_CACHE_REJECTED',
+  ClearCacheFulfilled: 'CLEAR_CACHE_FULFILLED',
+
   GetEventsRequested: 'GET_EVENTS_REQUESTED',
   GetEventsRejected: 'GET_EVENTS_REJECTED',
   GetEventsFulfilled: 'GET_EVENTS_FULFILLED',

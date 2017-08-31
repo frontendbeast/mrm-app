@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Text, View } from 'react-native';
 
 import globalStyles from '../styles/Styles';
@@ -16,7 +15,7 @@ export default class Page extends React.Component {
   render() {
     const { pages, title } = this.props;
 
-    if (pages.loading || !pages.data) {
+    if ((pages.loading === undefined || pages.loading) && !pages.data) {
       return null;
     }
 

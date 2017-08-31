@@ -11,7 +11,8 @@ const venuesReducer = (state = {}, action) => {
       return merge({}, state, { error: 'Error getting venues', loading: false });
     }
     case actionTypes.GetVenuesFulfilled: {
-      return merge({}, state, { data: action.venues, error: false, loading: false });
+      const merged =  merge({}, state, { error: false, loading: false });
+      return { ...merged, data: action.venues };
     }
     default:
       return state;

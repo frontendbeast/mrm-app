@@ -11,7 +11,8 @@ const eventsReducer = (state = {}, action) => {
       return merge({}, state, { error: 'Error getting events', loading: false });
     }
     case actionTypes.GetEventsFulfilled: {
-      return merge({}, state, { data: action.events, error: false, loading: false });
+      const merged =  merge({}, state, { error: false, loading: false });
+      return { ...merged, data: action.events };
     }
     default:
       return state;

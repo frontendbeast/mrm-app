@@ -5,8 +5,6 @@ export function getPages() {
   return dispatch => {
     dispatch(getPagesRequestedAction());
 
-    console.log('getPages');
-
     return cache
       .getAll('pages')
       .then(results => {

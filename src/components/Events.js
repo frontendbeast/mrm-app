@@ -14,7 +14,7 @@ export default class Events extends React.Component {
   render() {
     const { events } = this.props;
 
-    if (events.loading || !events.data) {
+    if ((events.loading === undefined || events.loading) && !events.data) {
       return null;
     }
 
