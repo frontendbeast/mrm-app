@@ -19,19 +19,19 @@ export function clearCache(node, field, value) {
 
 function clearCacheRequestedAction() {
   return {
-    type: actionTypes.GetPagesRequested
+    type: actionTypes.ClearCacheRequested
   };
 }
 
 function clearCacheRejectedAction() {
   return {
-    type: actionTypes.GetPagesRejected
+    type: actionTypes.ClearCacheRejected
   };
 }
 
 function clearCacheFulfilledAction(pages) {
   return {
-    type: actionTypes.GetPagesFulfilled,
+    type: actionTypes.ClearCacheFulfilled,
     pages
   };
 }
