@@ -24,9 +24,11 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
+
+
 const styles = {
   header: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.header,
     flexDirection: 'row',
     padding: dimensions.gutter,
     paddingTop: dimensions.gutter + dimensions.statusBarHeight,
