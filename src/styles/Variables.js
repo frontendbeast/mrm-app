@@ -1,5 +1,6 @@
 const paletteMaster = {
   black: '#222',
+  grey: '#ccc',
   red: '#b81a1b',
   white: '#fff',
   yellow: '#fd0',
@@ -16,6 +17,9 @@ export const palette = {
 
 export const colors = {
   header: palette.primary,
+  listItemHeader: palette.tertiary,
+  listItemHeaderText: palette.tertiaryText,
+  listItemBorder: paletteMaster.grey,
 };
 
 export const dimensions = {

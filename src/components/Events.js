@@ -3,7 +3,7 @@ import Moment from 'moment';
 
 import { Text, View } from 'react-native';
 
-import { dimensions } from '../styles/Variables';
+import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
 export default class Events extends React.Component {
@@ -21,15 +21,36 @@ export default class Events extends React.Component {
     const items = Object
       .entries(events.data)
       .map(([id, event]) => { return { ...event, id: id }; })
-      .sort((a, b) => { return Date.parse(b.date) - Date.parse(a.date); });
+      .sort((a, b) => { return Date.parse(a.date) - Date.parse(b.date); });
+
+    const days = {};
+
+    items.map(event => {
+      const day = Moment(event.date).format('dddd');
+      days[day] = days[day] || [];
+      days[day].push(event);
+    });
 
     return (
-      <View style={globalStyles.container}>
-        {items.map((event) => {
+      <View style={globalStyles.fullsize}>
+
+        {Object.entries(days).map(([day, listings]) => {
           return (
-            <View key={event.id} style={styles.event}>
-              <Text style={styles.heading}>{ event.name }</Text>
-              <Text>{ Moment(event.date).format('ha') } @ { event.venue.name }</Text>
+            <View key={day}>
+              <View style={styles.day}>
+                <Text style={styles.day__name}>{ day }</Text>
+              </View>
+              {listings.map((event, index) => {
+                return (
+                  <View key={event.id} style={[styles.event, index === listings.length - 1 && styles['event--last']]}>
+                    <View style={styles.event__link}>
+                      <Text style={styles.event__name}>{ event.name }</Text>
+                      <Text>{ Moment(event.date).format('ha') } @ { event.venue.name }</Text>
+                    </View>
+                  </View>
+                );
+              })}
+
             </View>
           );
         })}
@@ -39,11 +60,26 @@ export default class Events extends React.Component {
 }
 
 const styles = {
-  event: {
-    marginBottom: dimensions.gutter,
+  'day': {
+    backgroundColor: colors.listItemHeader,
+    padding: dimensions.gutter,
   },
-  heading: {
-    fontSize: 18,
+  'day__name': {
+    color: colors.listItemHeaderText,
+    fontWeight: 'bold',
+  },
+  'event': {
+    borderBottomColor: colors.listItemBorder,
+    borderBottomWidth: 0.5,
+  },
+  'event--last': {
+    borderBottomWidth: 0,
+  },
+  'event__link': {
+    borderBottomWidth: 0,
+    padding: dimensions.gutter,
+  },
+  'event__name': {
     fontWeight: 'bold',
   }
 };
