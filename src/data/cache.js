@@ -13,7 +13,7 @@ const cache = {
 
     if (field && value) {
       Object.entries(results).forEach(([id, item]) => {
-        if (item[field] === value) {
+        if ((field === 'id' && id === value) || item[field] === value) {
           delete results[id];
         }
       });

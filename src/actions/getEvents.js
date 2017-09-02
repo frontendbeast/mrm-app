@@ -64,9 +64,9 @@ function getEventByIDRejectedAction() {
   };
 }
 
-function getEventByIDFulfilledAction(pages) {
+function getEventByIDFulfilledAction(events) {
   return {
     type: actionTypes.GetEventByIDFulfilled,
-    pages
+    events
   };
 }

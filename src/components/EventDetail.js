@@ -15,10 +15,6 @@ export default class EventDetail extends React.Component {
     this.props.onGetEventByID(this.props.id);
   }
 
-  componentDidMount() {
-    console.log('WIDTH', Dimensions.get('window').width);
-  }
-
   render() {
     const { events, id } = this.props;
 
