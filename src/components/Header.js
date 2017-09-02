@@ -5,11 +5,16 @@ import { connect } from 'react-redux';
 
 import { colors, dimensions } from '../styles/Variables';
 
-const Header = ({ openDrawer, title }) => (
+const Header = ({ openDrawer, dismiss, title, back }) => (
   <View style={styles.header}>
+    {back ?
+    <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
+      <Text>Back</Text>
+    </TouchableOpacity> :
     <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
       <Text>Menu</Text>
     </TouchableOpacity>
+    }
     <Text style={styles.headerTitle}>{ title }</Text>
     <View style={styles.headerSpacer} />
   </View>
@@ -20,11 +25,11 @@ const mapStateToProps = state => ({  });
 const mapDispatchToProps = dispatch => ({
   openDrawer: () =>
     dispatch(NavigationActions.navigate({ routeName: 'DrawerOpen' })),
+  dismiss: () =>
+    dispatch(NavigationActions.back()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-
 
 const styles = {
   header: {

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import store from './data/store';
 
-import AppNavigator from './AppNavigator';
+import AppNavigator from './navigators/AppNavigator';
 
 export default class App extends React.Component {
   render() {

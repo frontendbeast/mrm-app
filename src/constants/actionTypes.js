@@ -7,6 +7,10 @@ const actionTypes = {
   GetEventsRejected: 'GET_EVENTS_REJECTED',
   GetEventsFulfilled: 'GET_EVENTS_FULFILLED',
 
+  GetEventByIDRequested: 'GET_EVENT_BY_ID_REQUESTED',
+  GetEventByIDRejected: 'GET_EVENT_BY_ID_REJECTED',
+  GetEventByIDFulfilled: 'GET_EVENT_BY_ID_FULFILLED',
+
   GetPagesRequested: 'GET_PAGES_REQUESTED',
   GetPagesRejected: 'GET_PAGES_REJECTED',
   GetPagesFulfilled: 'GET_PAGES_FULFILLED',

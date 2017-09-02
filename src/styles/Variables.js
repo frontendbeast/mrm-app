@@ -23,6 +23,7 @@ export const colors = {
 };
 
 export const dimensions = {
+  fontSizeHeader: 16,
   gutter: 16,
   statusBarHeight: 20,
 };

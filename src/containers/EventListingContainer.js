@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { getEvents } from '../actions/getEvents';
-import Events from '../components/Events';
+import EventListing from '../components/EventListing';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +15,6 @@ function mapDispatchToProps(dispatch) {
    };
 }
 
-const EventsContainer = connect(mapStateToProps, mapDispatchToProps)(Events);
+const EventListingContainer = connect(mapStateToProps, mapDispatchToProps)(EventListing);
 
-export default EventsContainer;
+export default EventListingContainer;

@@ -1,12 +1,18 @@
 import React from 'react';
-import Moment from 'moment';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 
-import { Text, View } from 'react-native';
+import Moment from 'moment';
 
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
-export default class Events extends React.Component {
+class EventListing extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
     this.props.onGetEvents();
   }
@@ -42,12 +48,16 @@ export default class Events extends React.Component {
               </View>
               {listings.map((event, index) => {
                 return (
-                  <View key={event.id} style={[styles.event, index === listings.length - 1 && styles['event--last']]}>
+                  <TouchableOpacity
+                    key={event.id}
+                    style={[styles.event, index === listings.length - 1 && styles['event--last']]}
+                    onPress={() => { this.props.viewDetail(event.id); }}
+                  >
                     <View style={styles.event__link}>
                       <Text style={styles.event__name}>{ event.name }</Text>
                       <Text>{ Moment(event.date).format('ha') } @ { event.venue.name }</Text>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
 
@@ -58,6 +68,15 @@ export default class Events extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({  });
+
+const mapDispatchToProps = dispatch => ({
+  viewDetail: (id) =>
+    dispatch(NavigationActions.navigate({ routeName: 'EventDetail', params: { id: id } })),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventListing);
 
 const styles = {
   'day': {

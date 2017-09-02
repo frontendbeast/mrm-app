@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import  { colors, dimensions } from './Variables';
+import  { dimensions } from './Variables';
 
 export default StyleSheet.create({
 
@@ -10,5 +10,10 @@ export default StyleSheet.create({
 
   fullsize: {
     flex: 1
+  },
+
+  heading: {
+    fontSize: dimensions.fontSizeHeader,
+    fontWeight: 'bold',
   }
 });

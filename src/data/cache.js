@@ -30,7 +30,8 @@ const cache = {
   },
 
   getByAttribute: async (node, field, value, limit) => {
-    const fieldName = `fields.${field}`;
+    const fieldType = (field === 'id') ? 'sys' : 'fields';
+    const fieldName = `${fieldType}.${field}`;
 
     const options = {
       [fieldName]: value,
@@ -43,7 +44,7 @@ const cache = {
 
     const cached = await AsyncStorage.getItem(options.content_type);
     const results = (cached) ? JSON.parse(cached) : {};
-    const result = pickBy(results, (item, id) => { return item[field] === value; });
+    const result = pickBy(results, (item, id) => { return (field === 'id') ? id === value : item[field] === value; });
 
     return (Object.keys(result).length) ? new Promise((resolve, reject) => { resolve(result); }) : _dbGet(options);
   },
@@ -94,7 +95,7 @@ function _dbGet(options) {
         resolve(items);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         reject(error);
       });
   });
