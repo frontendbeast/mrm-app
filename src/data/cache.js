@@ -76,7 +76,7 @@ function _dbGet(options) {
 
           Object.entries(object).forEach(([key, value]) => {
             if (value.sys) {
-              results.includes.Entry.forEach((include) => {
+              results.includes[value.sys.type].forEach((include) => {
                 if (value.sys.id === include.sys.id) {
                   object[key] = include.fields;
                 }
