@@ -4,12 +4,14 @@ import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 
 import PropTypes from 'prop-types';
 
-import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
+import HomeScreen from '../screens/HomeScreen';
+import TeamScreen from '../screens/TeamScreen';
 
 export const AppNavigator = DrawerNavigator({
   Home: { screen: HomeScreen },
   Events: { screen: EventsScreen },
+  Team: { screen: TeamScreen },
 },{
   mode: 'modal',
 });
