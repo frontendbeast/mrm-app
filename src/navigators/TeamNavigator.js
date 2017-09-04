@@ -4,12 +4,12 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import PropTypes from 'prop-types';
 
-import EventDetailScreen from '../screens/EventDetailScreen';
+import TeamDetailScreen from '../screens/TeamDetailScreen';
 import TeamListingScreen from '../screens/TeamListingScreen';
 
 export const TeamNavigator = StackNavigator({
   TeamListing: { screen: TeamListingScreen },
-  EventDetail: { screen: EventDetailScreen },
+  TeamDetail: { screen: TeamDetailScreen },
 },{
   headerMode: 'none',
 });

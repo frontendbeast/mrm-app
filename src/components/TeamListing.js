@@ -35,6 +35,7 @@ class TeamListing extends React.Component {
               <TouchableOpacity
                 key={person.id}
                 style={[styles.person, index === items.length - 1 && styles['person--last']]}
+                onPress={() => { this.props.viewDetail(person.id); }}
               >
                 <View style={styles.person__photo}>
                   <Image style={styles.person__image} source={{uri: `https:${person.photo.file.url}?w=300&fit=scale`}} resizeMode="cover" />
@@ -55,7 +56,7 @@ const mapStateToProps = state => ({  });
 
 const mapDispatchToProps = dispatch => ({
   viewDetail: (id) =>
-    dispatch(NavigationActions.navigate({ routeName: 'EventDetail', params: { id: id } })),
+    dispatch(NavigationActions.navigate({ routeName: 'TeamDetail', params: { id: id } })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamListing);
