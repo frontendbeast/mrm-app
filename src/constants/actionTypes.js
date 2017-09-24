@@ -3,6 +3,10 @@ const actionTypes = {
   ClearCacheRejected: 'CLEAR_CACHE_REJECTED',
   ClearCacheFulfilled: 'CLEAR_CACHE_FULFILLED',
 
+  GetBrotherClubsRequested: 'GET_BROTHER_CLUBS_REQUESTED',
+  GetBrotherClubsRejected: 'GET_BROTHER_CLUBS_REJECTED',
+  GetBrotherClubsFulfilled: 'GET_BROTHER_CLUBS_FULFILLED',
+
   GetEventsRequested: 'GET_EVENTS_REQUESTED',
   GetEventsRejected: 'GET_EVENTS_REJECTED',
   GetEventsFulfilled: 'GET_EVENTS_FULFILLED',
