@@ -31,7 +31,7 @@ export default class TeamDetail extends React.Component {
         : null }
         <View style={globalStyles.container}>
           <Text style={globalStyles.heading}>{ person.name }</Text>
-          <Text>{ person.bio }</Text>
+          <Text>{ person.biography }</Text>
         </View>
       </View>
     );
