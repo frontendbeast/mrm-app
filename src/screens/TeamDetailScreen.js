@@ -27,7 +27,7 @@ export default class TeamDetailScreen extends React.Component {
     });
 
     store
-      .dispatch(clearCache('events', 'id', this.props.navigation.state.params.id))
+      .dispatch(clearCache('persons', 'id', this.props.navigation.state.params.id))
       .then(() => {
         store
           .dispatch(getPersonByID(this.props.navigation.state.params.id))
