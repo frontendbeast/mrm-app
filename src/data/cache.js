@@ -29,6 +29,16 @@ const cache = {
     });
   },
 
+  getAll: async (node) => {
+    const options = {
+      content_type: node.slice(0, -1),
+    };
+
+    const cached = await AsyncStorage.getItem(options.content_type);
+
+    return (cached) ? new Promise((resolve, reject) => { resolve(JSON.parse(cached)); }) : _dbGet(options);
+  },
+
   getByAttribute: async (node, field, value, limit) => {
     const fieldType = (field === 'id') ? 'sys' : 'fields';
     const fieldName = `${fieldType}.${field}`;
@@ -49,18 +59,19 @@ const cache = {
     return (Object.keys(result).length) ? new Promise((resolve, reject) => { resolve(result); }) : _dbGet(options);
   },
 
-  getAll: async (node) => {
+  getMenu: async () => {
     const options = {
-      content_type: node.slice(0, -1),
+      content_type: 'page',
+      'fields.showInMenu': true,
+      select: 'fields.title,fields.menuOrder',
+      order: 'fields.menuOrder'
     };
 
-    const cached = await AsyncStorage.getItem(options.content_type);
-
-    return (cached) ? new Promise((resolve, reject) => { resolve(JSON.parse(cached)); }) : _dbGet(options);
-  }
+    return _dbGet(options, 'menu');
+  },
 };
 
-function _dbGet(options) {
+function _dbGet(options, saveAs) {
   return new Promise(async(resolve, reject) => {
     const cached = await AsyncStorage.getItem(options.content_type);
 
@@ -89,8 +100,9 @@ function _dbGet(options) {
 
         const result = (cached) ? JSON.parse(cached) : {};
         const merged = merge(result, items);
+        const cacheName = (saveAs) ? saveAs : options.content_type;
 
-        AsyncStorage.setItem(options.content_type, JSON.stringify(merged));
+        AsyncStorage.setItem(cacheName, JSON.stringify(merged));
 
         resolve(items);
       })

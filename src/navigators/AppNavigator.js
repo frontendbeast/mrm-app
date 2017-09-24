@@ -4,29 +4,34 @@ import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 
 import PropTypes from 'prop-types';
 
+import Menu from '../components/Menu';
+
+import BrotherClubListingScreen from '../screens/BrotherClubListingScreen';
 import EventsScreen from '../screens/EventsScreen';
 import HomeScreen from '../screens/HomeScreen';
 import TeamScreen from '../screens/TeamScreen';
 
 export const AppNavigator = DrawerNavigator({
-  Home: { screen: HomeScreen },
-  Events: { screen: EventsScreen },
-  Team: { screen: TeamScreen },
+  'Brother Clubs': { screen: BrotherClubListingScreen },
+  'Events': { screen: EventsScreen },
+  'Home': { screen: HomeScreen },
+  'Team': { screen: TeamScreen },
 },{
-  mode: 'modal',
+  contentComponent: Menu,
+  initialRouteName: 'Home',
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={ addNavigationHelpers({ dispatch, state: nav }) } />
 );
 
+const mapStateToProps = state => ({
+  nav: state.nav,
+});
+
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.object.isRequired,
 };
-
-const mapStateToProps = state => ({
-  nav: state.nav,
-});
 
 export default connect(mapStateToProps)(AppWithNavigationState);
