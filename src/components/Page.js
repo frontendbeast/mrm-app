@@ -29,8 +29,6 @@ export default class Page extends React.Component {
       return null;
     }
 
-    console.log(id, pages.data, pages.data[id]);
-
     return (
       <View style={globalStyles.container}>
         {Object.entries(pages.data).map(([pageID, page]) => {

@@ -38,7 +38,6 @@ export default class PageScreen extends React.Component {
   }
 
   render() {
-    console.log('PAGE', this.props.navigation.state.params.id)
     return (
       <View style={globalStyles.fullsize}>
         <Header title="Page" />
