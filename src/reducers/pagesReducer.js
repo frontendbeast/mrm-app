@@ -14,6 +14,15 @@ const pagesReducer = (state = {}, action) => {
       const merged =  merge({}, state, { error: false, loading: false });
       return { ...merged, data: action.pages };
     }
+    case actionTypes.GetPageByIDRequested: {
+      return merge({}, state, { loading: true });
+    }
+    case actionTypes.GetPageByIDRejected: {
+      return merge({}, state, { error: 'Error getting page by ID', loading: false });
+    }
+    case actionTypes.GetPageByIDFulfilled: {
+      return merge({}, state, { data: action.pages, error: false, loading: false });
+    }
     case actionTypes.GetPageByTitleRequested: {
       return merge({}, state, { loading: true });
     }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getPages, getPageByTitle } from '../actions/getPages';
+import { getPages, getPageByID, getPageByTitle } from '../actions/getPages';
 import Page from '../components/Page';
 
 function mapStateToProps(state) {
@@ -12,7 +12,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onGetPages: () => dispatch(getPages()),
-    onGetPageByTitle: (name) => dispatch(getPageByTitle(name)),
+    onGetPageByID: (id) => dispatch(getPageByID(id)),
+    onGetPageByTitle: (title) => dispatch(getPageByTitle(title)),
   };
 }
 

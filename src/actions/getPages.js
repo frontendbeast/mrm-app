@@ -17,6 +17,22 @@ export function getPages() {
   };
 }
 
+export function getPageByID(id) {
+  return dispatch => {
+    dispatch(getPageByIDRequestedAction());
+
+    return cache
+      .getByAttribute('pages', 'id', id, 1)
+      .then(results => {
+        dispatch(getPageByIDFulfilledAction(results));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(getPageByIDRejectedAction());
+      });
+  };
+}
+
 export function getPageByTitle(title) {
   return dispatch => {
     dispatch(getPageByTitleRequestedAction());
@@ -48,6 +64,25 @@ function getPagesRejectedAction() {
 function getPagesFulfilledAction(pages) {
   return {
     type: actionTypes.GetPagesFulfilled,
+    pages
+  };
+}
+
+function getPageByIDRequestedAction() {
+  return {
+    type: actionTypes.GetPageByIDRequested
+  };
+}
+
+function getPageByIDRejectedAction() {
+  return {
+    type: actionTypes.GetPageByIDRejected
+  };
+}
+
+function getPageByIDFulfilledAction(pages) {
+  return {
+    type: actionTypes.GetPageByIDFulfilled,
     pages
   };
 }
