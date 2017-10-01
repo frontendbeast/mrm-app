@@ -16,7 +16,7 @@ export const palette = {
 };
 
 export const colors = {
-  header: palette.primary,
+  header: palette.tertiary,
   listItemHeader: palette.tertiary,
   listItemHeaderText: palette.tertiaryText,
   listItemBorder: paletteMaster.grey,

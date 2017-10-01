@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { Image, TouchableOpacity, Text, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -7,16 +7,20 @@ import { colors, dimensions } from '../styles/Variables';
 
 const Header = ({ openDrawer, dismiss, title, back }) => (
   <View style={styles.header}>
+    <View style={styles.headerContainer}>
     {back ?
-    <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
-      <Text>Back</Text>
-    </TouchableOpacity> :
-    <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
-      <Text>Menu</Text>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
+        <Text>Back</Text>
+      </TouchableOpacity> :
+      <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
+        <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
+      </TouchableOpacity>
     }
-    <Text style={styles.headerTitle}>{ title }</Text>
+    <View style={{}}>
+      <Image source={require('../assets/images/logo.png')} style={styles.headerLogo} resizeMode="contain" />
+    </View>
     <View style={styles.headerSpacer} />
+    </View>
   </View>
 );
 
@@ -33,24 +37,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 const styles = {
   header: {
+    backgroundColor: '#000',
+    paddingTop: dimensions.statusBarHeight,
+  },
+  headerContainer: {
     backgroundColor: colors.header,
     flexDirection: 'row',
-    padding: dimensions.gutter,
-    paddingTop: dimensions.gutter + dimensions.statusBarHeight,
+  },
+  headerLogo :{
+    marginTop:  dimensions.gutter - 1,
+    width: 150,
   },
   headerNavButton: {
     alignSelf: 'flex-start',
     flex: 1,
+    padding: dimensions.gutter,
+    width: 30,
   },
   headerSpacer: {
     alignSelf: 'flex-end',
     flex: 1,
-  },
-  headerTitle: {
-    color: colors.primaryText,
-    flex: 3,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    padding: dimensions.gutter,
+    width: 30,
   }
 };

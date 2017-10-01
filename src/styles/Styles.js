@@ -15,5 +15,6 @@ export default StyleSheet.create({
   heading: {
     fontSize: dimensions.fontSizeHeader,
     fontWeight: 'bold',
-  }
+  },
+
 });
