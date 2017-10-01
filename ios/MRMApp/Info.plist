@@ -26,6 +26,13 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>norwester.otf</string>
+		<string>ZillaSlab-Italic.ttf</string>
+		<string>ZillaSlab-Regular.ttf</string>
+		<string>ZillaSlab-SemiBold.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

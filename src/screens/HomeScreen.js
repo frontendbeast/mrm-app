@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 import PullToRefresh from 'react-native-simple-ptr';
 
 import store from '../data/store';
