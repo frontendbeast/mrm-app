@@ -3,6 +3,8 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
+import ImageLoader from './ImageLoader';
+
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
@@ -38,7 +40,7 @@ class TeamListing extends React.Component {
                 onPress={() => { this.props.viewDetail(person.id); }}
               >
                 <View style={styles.person__photo}>
-                  <Image style={styles.person__image} source={{uri: `https:${person.photo.file.url}?w=300&fit=scale`}} resizeMode="cover" />
+                  <ImageLoader source={`https:${person.photo.file.url}`} height={300} width={400} imgSize={325} />
                 </View>
                 <View style={styles.person__link}>
                   <Text style={styles.person__name}>{ person.name }</Text>
@@ -69,19 +71,9 @@ const styles = {
   'person': {
     width: '50%',
   },
-  'person__image': {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
   'person__link': {
     borderBottomWidth: 0,
     padding: dimensions.gutter,
-  },
-  'person__photo': {
-    paddingTop: '100%',
   },
   'person__name': {
     fontWeight: 'bold',

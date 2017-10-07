@@ -2,6 +2,8 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Markdown, {getUniqueID} from 'react-native-markdown-renderer';
 
+import ImageLoader from './ImageLoader';
+
 import globalStyles from '../styles/Styles';
 import markdownStyles from '../styles/Markdown';
 
@@ -35,6 +37,9 @@ export default class Page extends React.Component {
             {children}
           </Text>
         </View>,
+      img: (node, children, parent, styles) => {
+        return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={{marginLeft: -16, marginRight: -16}} />;
+      },
       p: (node, children, parent, styles) => {
         const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
 
@@ -61,15 +66,14 @@ export default class Page extends React.Component {
 
           return (
             <View key={pageID}>
-              <View style={{position: 'absolute', left: 0, right: 0, zIndex: 1}}>
-                <View style={{flex: 1, alignItems:'center'}}>
-                  <Text style={{backgroundColor: '#fd0', fontFamily: 'norwester', fontSize: 40, paddingBottom: 10, paddingLeft: 15, paddingRight: 15, paddingTop: 10, marginTop: 36}}>{page.title.toUpperCase()}</Text>
-                </View>
-              </View>
             {page.image ?
-              <View style={{ paddingTop:`${(page.image.file.details.image.width/page.image.file.details.image.height)*100}%`, backgroundColor: '#666' }}>
-                <Image source={{ uri: `https:${page.image.file.url}?w=65` }} style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}} resizeMode="contain" />
-                <Image source={{ uri: `https:${page.image.file.url}?w=650` }} style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}} resizeMode="contain" />
+              <View>
+                <View style={{position: 'absolute', left: 0, right: 0, zIndex: 1}}>
+                  <View style={{flex: 1, alignItems:'center'}}>
+                    <Text style={{backgroundColor: '#fd0', fontFamily: 'norwester', fontSize: 40, paddingBottom: 10, paddingLeft: 15, paddingRight: 15, paddingTop: 10, marginTop: 36}}>{page.title.toUpperCase()}</Text>
+                  </View>
+                </View>
+                <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />
               </View>
             : null}
               <View style={globalStyles.container}>
