@@ -3,18 +3,26 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import { getMenu } from '../actions/getMenu';
+import { getSettings, getSettingsCache } from '../actions/getSettings';
 
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
 class Menu extends React.Component {
   componentDidMount() {
-    this.props.onGetMenu();
+    this.props.onGetSettings();
+    this.props.onGetSettingsCache();
   }
 
   render () {
-    const { menu } = this.props;
+    const { settings } = this.props;
+
+    if(!settings || !settings.data) {
+      return null;
+    }
+
+    const config = Object.entries(settings.data[1])[0][1];
+    const pageList = settings.data[0];
 
     const renderLink = (routeName, title, id) => {
       const key = (id) ? id : Math.floor(Math.random() * (100000 + 1));
@@ -28,37 +36,15 @@ class Menu extends React.Component {
       );
     };
 
-    const menuItemsStatic =  [{
-      routeName: 'Home',
-      menuOrder: 0,
-    },{
-      routeName: 'Events',
-      menuOrder: 10,
-    },{
-      routeName: 'Team',
-      menuOrder: 20,
-    },{
-      routeName: 'Brother Clubs',
-      menuOrder: 50,
-    }];
-
-    if (!menu.data) {
-      menu.data = {};
-    }
-
     return (
       <View style={[globalStyles.fullsize, styles.menu]}>
-        {menuItemsStatic.map((itemStatic, index) => {
-          const next = (index < menuItemsStatic.length-1) ? index + 1 : false;
+        {config.menu.map((item, index) => {
           const items = [];
 
-          items.push(renderLink(itemStatic.routeName));
+          const page = pageList[item.sys.id];
+          const routeName = (page.appScreen) ? page.appScreen : 'Page';
 
-          Object.entries(menu.data).map(([id, itemDynamic]) => {
-            if (itemDynamic.menuOrder > itemStatic.menuOrder && (!next || itemDynamic.menuOrder < menuItemsStatic[next].menuOrder)) {
-              items.push(renderLink('Page', itemDynamic.title, id));
-            }
-          });
+          items.push(renderLink(routeName, page.title, item.sys.id));
 
           return items;
         })}
@@ -69,11 +55,12 @@ class Menu extends React.Component {
 
 
 const mapStateToProps = state => ({
-  menu: state.menu,
+  settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onGetMenu: () => dispatch(getMenu()),
+  onGetSettings: () => dispatch(getSettings()),
+  onGetSettingsCache: () => dispatch(getSettingsCache()),
   navigateTo: (routeName, id) => {
     const options = {
       routeName: routeName,
@@ -82,7 +69,6 @@ const mapDispatchToProps = dispatch => ({
     if (id) {
       options.params = { id: id };
     }
-
 
     dispatch(NavigationActions.navigate(options));
   },

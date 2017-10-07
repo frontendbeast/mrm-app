@@ -15,9 +15,13 @@ const actionTypes = {
   GetEventByIDRejected: 'GET_EVENT_BY_ID_REJECTED',
   GetEventByIDFulfilled: 'GET_EVENT_BY_ID_FULFILLED',
 
-  GetMenuRequested: 'GET_MENU_REQUESTED',
-  GetMenuRejected: 'GET_MENU_REJECTED',
-  GetMenuFulfilled: 'GET_MENU_FULFILLED',
+  GetSettingsRequested: 'GET_SETTINGS_REQUESTED',
+  GetSettingsRejected: 'GET_SETTINGS_REJECTED',
+  GetSettingsFulfilled: 'GET_SETTINGS_FULFILLED',
+
+  GetSettingsCacheRequested: 'GET_SETTINGS_CACHE_REQUESTED',
+  GetSettingsCacheRejected: 'GET_SETTINGS_CACHE_REJECTED',
+  GetSettingsCacheFulfilled: 'GET_SETTINGS_CACHE_FULFILLED',
 
   GetPagesRequested: 'GET_PAGES_REQUESTED',
   GetPagesRejected: 'GET_PAGES_REJECTED',

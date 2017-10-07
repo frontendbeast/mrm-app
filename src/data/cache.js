@@ -9,7 +9,7 @@ const cache = {
     const contentType = node.slice(0, -1);
     const cached = await AsyncStorage.getItem(contentType);
 
-    let results = (cached && field && value) ? JSON.parse(cached) : {};
+    let results = (cached !== null && field && value) ? JSON.parse(cached) : {};
 
     if (field && value) {
       Object.entries(results).forEach(([id, item]) => {
@@ -36,7 +36,7 @@ const cache = {
 
     const cached = await AsyncStorage.getItem(options.content_type);
 
-    return (cached) ? new Promise((resolve, reject) => { resolve(JSON.parse(cached)); }) : _dbGet(options);
+    return (cached !== null) ? new Promise((resolve, reject) => { resolve(JSON.parse(cached)); }) : _dbGet(options);
   },
 
   getByAttribute: async (node, field, value, limit) => {
@@ -53,27 +53,46 @@ const cache = {
     }
 
     const cached = await AsyncStorage.getItem(options.content_type);
-    const results = (cached) ? JSON.parse(cached) : {};
+    const results = (cached !== null) ? JSON.parse(cached) : {};
     const result = pickBy(results, (item, id) => { return (field === 'id') ? id === value : item[field] === value; });
 
     return (Object.keys(result).length) ? new Promise((resolve, reject) => { resolve(result); }) : _dbGet(options);
   },
 
-  getMenu: async () => {
-    const options = {
+  getSettings: () => {
+    const optionsPageList = {
       content_type: 'page',
-      'fields.showInMenu': true,
-      select: 'fields.title,fields.menuOrder',
-      order: 'fields.menuOrder'
+      select: 'fields.title,fields.appScreen,fields.image',
     };
 
-    return _dbGet(options, 'menu');
+    const optionsSettings = {
+      content_type: 'settings',
+      select: 'fields',
+      limit: 1,
+      include: 0,
+    };
+
+    return Promise.all([_dbGet(optionsPageList, 'pageList'), _dbGet(optionsSettings, 'settings')]);
+  },
+
+  getSettingsCache: async () => {
+    const pageList = await AsyncStorage.getItem('pageListX');
+    const settings = await AsyncStorage.getItem('settingsX');
+
+    let cached = undefined;
+
+    if (pageList !== null && settings !== null) {
+      cached = [JSON.parse(pageList), JSON.parse(settings)];
+    }
+
+    return cached;
   },
 };
 
 function _dbGet(options, saveAs) {
   return new Promise(async(resolve, reject) => {
-    const cached = await AsyncStorage.getItem(options.content_type);
+    const cacheName = (saveAs) ? saveAs : options.content_type;
+    const cached = await AsyncStorage.getItem(cacheName);
 
     database
       .getEntries(options)
@@ -98,9 +117,8 @@ function _dbGet(options, saveAs) {
           items[item.sys.id] = object;
         });
 
-        const result = (cached) ? JSON.parse(cached) : {};
+        const result = (cached  !== null) ? JSON.parse(cached) : {};
         const merged = merge(result, items);
-        const cacheName = (saveAs) ? saveAs : options.content_type;
 
         AsyncStorage.setItem(cacheName, JSON.stringify(merged));
 
