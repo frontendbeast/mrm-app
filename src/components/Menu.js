@@ -30,7 +30,7 @@ class Menu extends React.Component {
       return (
         <TouchableOpacity key={key} onPress={() => { this.props.navigateTo(routeName, id); }}>
           <View style={styles.menu__link}>
-            <Text>{ title ? title : routeName }</Text>
+            <Text>{title}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -52,7 +52,6 @@ class Menu extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   settings: state.settings,
