@@ -17,6 +17,12 @@ export const palette = {
 
 export const colors = {
   header: palette.tertiary,
+
+  homeGridTextBG: paletteMaster.white,
+  homeGridText: paletteMaster.black,
+  homeGridTextFeatureBG: palette.primary,
+  homeGridTextFeature: palette.primaryText,
+
   listItemHeader: palette.tertiary,
   listItemHeaderText: palette.tertiaryText,
   listItemBorder: paletteMaster.grey,
