@@ -86,7 +86,7 @@ export default class ImageLoader extends React.Component {
     const { backgroundColor, imgSize, resizeMode, source, style } = this.props;
 
     return (
-      <View style={[style, styles.imageContainer, { backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`}]}>
+      <View style={[styles.imageContainer, { backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`}, style]}>
         <Animated.Image style={[styles.image, {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} blurRadius={1} onLoad={this.onLoadThumb}/>
         <Animated.Image style={[styles.image, {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>
