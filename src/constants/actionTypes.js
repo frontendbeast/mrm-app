@@ -23,17 +23,9 @@ const actionTypes = {
   GetSettingsCacheRejected: 'GET_SETTINGS_CACHE_REJECTED',
   GetSettingsCacheFulfilled: 'GET_SETTINGS_CACHE_FULFILLED',
 
-  GetPagesRequested: 'GET_PAGES_REQUESTED',
-  GetPagesRejected: 'GET_PAGES_REJECTED',
-  GetPagesFulfilled: 'GET_PAGES_FULFILLED',
-
   GetPageByIDRequested: 'GET_PAGE_BY_ID_REQUESTED',
   GetPageByIDRejected: 'GET_PAGE_BY_ID_REJECTED',
   GetPageByIDFulfilled: 'GET_PAGE_BY_ID_FULFILLED',
-
-  GetPageByTitleRequested: 'GET_PAGE_BY_TITLE_REQUESTED',
-  GetPageByTitleRejected: 'GET_PAGE_BY_TITLE_REJECTED',
-  GetPageByTitleFulfilled: 'GET_PAGE_BY_TITLE_FULFILLED',
 
   GetPersonsRequested: 'GET_PERSONS_REQUESTED',
   GetPersonsRejected: 'GET_PERSONS_REJECTED',
