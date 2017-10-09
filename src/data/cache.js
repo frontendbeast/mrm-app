@@ -62,7 +62,7 @@ const cache = {
   getSettings: () => {
     const optionsPageList = {
       content_type: 'page',
-      select: 'fields.title,fields.appScreen,fields.image',
+      select: 'fields.title,fields.appScreen,fields.image,sys',
     };
 
     const optionsSettings = {
@@ -101,7 +101,8 @@ function _dbGet(options, saveAs) {
 
         results.items.forEach((item) => {
           let object = {
-            ...item.fields
+            ...item.fields,
+            lastUpdated: item.sys.updatedAt
           };
 
           Object.entries(object).forEach(([key, value]) => {
