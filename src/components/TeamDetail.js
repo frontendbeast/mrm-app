@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 
 import ImageLoader from './ImageLoader';
+import Loading from './Loading';
 
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
@@ -19,7 +20,7 @@ export default class TeamDetail extends React.Component {
     const { persons, id } = this.props;
 
     if ((persons.loading === undefined || persons.loading) && !persons.data) {
-      return null;
+      return <Loading />;
     }
 
     const person = persons.data[id];

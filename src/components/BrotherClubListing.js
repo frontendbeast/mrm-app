@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
+import Loading from './Loading';
+
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
@@ -17,7 +19,7 @@ export default class BrotherClubListing extends React.Component {
     const { brotherClubs } = this.props;
 
     if ((brotherClubs.loading === undefined || brotherClubs.loading) && !brotherClubs.data) {
-      return null;
+      return <Loading />;
     }
 
     const items = Object

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import Moment from 'moment';
 
+import Loading from './Loading';
+
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
 
@@ -21,7 +23,7 @@ class EventListing extends React.Component {
     const { events } = this.props;
 
     if ((events.loading === undefined || events.loading) && !events.data) {
-      return null;
+      return <Loading />;
     }
 
     const items = Object

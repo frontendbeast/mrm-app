@@ -45,7 +45,7 @@ export default class EventListingScreen extends React.Component {
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}
         >
-          <ScrollView>
+          <ScrollView contentContainerStyle={{minHeight: '100%'}}>
             <EventListingContainer/>
           </ScrollView>
         </PullToRefresh>

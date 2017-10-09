@@ -1,6 +1,6 @@
 import React from 'react';
 import PullToRefresh from 'react-native-simple-ptr';
-import { Text, TouchableOpacity, ScrollView, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
@@ -11,6 +11,7 @@ import { getSettingsCache } from '../actions/getSettings';
 
 import Header from '../components/Header';
 import ImageLoader from '../components/ImageLoader';
+import Loading from '../components/Loading';
 import PagesContainer from '../containers/PagesContainer';
 
 import globalStyles from '../styles/Styles';
@@ -62,7 +63,9 @@ class HomeScreen extends React.Component {
     };
 
     if(!settings || !settings.data) {
-      return null;
+      return (
+        <Loading />
+      );
     }
 
     const config = Object.entries(settings.data[1])[0][1];

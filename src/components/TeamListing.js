@@ -4,6 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import ImageLoader from './ImageLoader';
+import Loading from './Loading';
 
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
@@ -21,7 +22,7 @@ class TeamListing extends React.Component {
     const { persons } = this.props;
 
     if ((persons.loading === undefined || persons.loading) && !persons.data) {
-      return null;
+      return <Loading />;
     }
 
     const items = Object

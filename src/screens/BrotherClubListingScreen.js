@@ -45,7 +45,7 @@ export default class BrotherClubListingScreen extends React.Component {
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}
         >
-          <ScrollView>
+          <ScrollView contentContainerStyle={{minHeight: '100%'}}>
             <BrotherClubListingContainer/>
           </ScrollView>
         </PullToRefresh>

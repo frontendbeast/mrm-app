@@ -45,7 +45,7 @@ export default class TeamDetailScreen extends React.Component {
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}
         >
-          <ScrollView>
+          <ScrollView contentContainerStyle={{minHeight: '100%'}}>
             <TeamDetailContainer id={this.props.navigation.state.params.id} />
           </ScrollView>
         </PullToRefresh>
