@@ -68,8 +68,11 @@ const styles = {
   'persons': {
     flex: 1,
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
   },
   'person': {
+    aspectRatio: 1,
     width: '50%',
   },
   'person__link': {
