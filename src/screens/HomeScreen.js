@@ -7,7 +7,7 @@ import { NavigationActions } from 'react-navigation';
 import store from '../data/store';
 
 import { clearCache } from '../actions/clearCache';
-import { getSettingsCache } from '../actions/getSettings';
+import { getSettings } from '../actions/getSettings';
 
 import Header from '../components/Header';
 import ImageLoader from '../components/ImageLoader';
@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onGetSettingsCache: () => dispatch(getSettingsCache()),
+  onGetSettings: () => dispatch(getSettings()),
   navigateTo: (routeName, id) => {
     const options = {
       routeName: routeName,
