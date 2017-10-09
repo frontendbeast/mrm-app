@@ -76,8 +76,8 @@ const cache = {
   },
 
   getSettingsCache: async () => {
-    const pageList = await AsyncStorage.getItem('pageListX');
-    const settings = await AsyncStorage.getItem('settingsX');
+    const pageList = await AsyncStorage.getItem('pageList');
+    const settings = await AsyncStorage.getItem('settings');
 
     let cached = undefined;
 
