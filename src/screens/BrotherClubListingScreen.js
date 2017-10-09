@@ -40,7 +40,7 @@ export default class BrotherClubListingScreen extends React.Component {
   render() {
     return (
       <View style={globalStyles.fullsize}>
-        <Header title="Brother Clubs" />
+        <Header/>
         <PullToRefresh
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}

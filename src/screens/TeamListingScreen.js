@@ -40,7 +40,7 @@ export default class TeamListingScreen extends React.Component {
   render() {
     return (
       <View style={globalStyles.fullsize}>
-        <Header title="Team" />
+        <Header/>
         <PullToRefresh
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}

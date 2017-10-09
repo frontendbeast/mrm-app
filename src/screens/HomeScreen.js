@@ -73,7 +73,7 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={globalStyles.fullsize}>
-        <Header title="Welcome" />
+        <Header/>
         <PullToRefresh
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}

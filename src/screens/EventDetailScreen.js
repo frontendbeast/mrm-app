@@ -40,7 +40,7 @@ export default class EventDetailScreen extends React.Component {
   render() {
     return (
       <View style={globalStyles.fullsize}>
-        <Header title="Event Details" back={true} />
+        <Header back={true}/>
         <PullToRefresh
           isRefreshing={this.state.isRefreshing}
           onRefresh={this._onRefresh.bind(this)}
