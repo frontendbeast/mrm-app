@@ -75,7 +75,7 @@ export default class Page extends React.Component {
           <View>
             <View style={{position: 'absolute', left: 0, right: 0, zIndex: 1}}>
               <View style={{flex: 1, alignItems:'center'}}>
-                <Text style={{backgroundColor: '#fd0', color: '#222', fontFamily: 'norwester', fontSize: 40, paddingBottom: 10, paddingLeft: 15, paddingRight: 15, paddingTop: 10, marginTop: 36}}>{page.title.toUpperCase()}</Text>
+                <Text style={{backgroundColor: '#fd0', color: '#222', fontFamily: 'BebasNeue', fontSize: 40, paddingBottom: 10, paddingLeft: 15, paddingRight: 15, paddingTop: 10, marginTop: 36}}>{page.title.toUpperCase()}</Text>
               </View>
             </View>
             <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />

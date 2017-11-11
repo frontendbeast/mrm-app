@@ -28,10 +28,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>norwester.otf</string>
 		<string>ZillaSlab-Italic.ttf</string>
 		<string>ZillaSlab-Regular.ttf</string>
 		<string>ZillaSlab-SemiBold.ttf</string>
+		<string>BebasNeue.otf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

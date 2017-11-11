@@ -38,8 +38,8 @@
 		5D135418FCDC440FAB074126 /* ZillaSlab-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D338A0FA4724617A232A2CD /* ZillaSlab-SemiBold.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A2E405718C514A6EAC11F0D7 /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = E934B56FDA2C4E3E8C8BE205 /* norwester.otf */; };
 		CC481949D166458E87CA131D /* ZillaSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */; };
+		5D9B21687D6449E596E61855 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 74D08DAF3F70468F8831987D /* BebasNeue.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,7 +290,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZillaSlab-Italic.ttf"; path = "../src/assets/fonts/ZillaSlab-Italic.ttf"; sourceTree = "<group>"; };
-		E934B56FDA2C4E3E8C8BE205 /* norwester.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = norwester.otf; path = ../src/assets/fonts/norwester.otf; sourceTree = "<group>"; };
+		74D08DAF3F70468F8831987D /* BebasNeue.otf */ = {isa = PBXFileReference; name = "BebasNeue.otf"; path = "../src/assets/fonts/BebasNeue.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,10 +458,10 @@
 		43DBDE749A0E4E5886D5290D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E934B56FDA2C4E3E8C8BE205 /* norwester.otf */,
 				C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */,
 				36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */,
 				6D338A0FA4724617A232A2CD /* ZillaSlab-SemiBold.ttf */,
+				74D08DAF3F70468F8831987D /* BebasNeue.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -924,10 +924,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A2E405718C514A6EAC11F0D7 /* norwester.otf in Resources */,
 				00BC89C3985149D2A5FBB9E9 /* ZillaSlab-Italic.ttf in Resources */,
 				CC481949D166458E87CA131D /* ZillaSlab-Regular.ttf in Resources */,
 				5D135418FCDC440FAB074126 /* ZillaSlab-SemiBold.ttf in Resources */,
+				5D9B21687D6449E596E61855 /* BebasNeue.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
