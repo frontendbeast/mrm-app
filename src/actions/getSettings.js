@@ -6,37 +6,18 @@ export function getSettings() {
     dispatch(getSettingsRequestedAction());
 
     return Promise
-      .all([cache.clear('pageList'), cache.clear('settings')])
-      .then(() => {
-        return cache
-          .getSettings()
-          .then(results => {
-            dispatch(getSettingsFulfilledAction(results));
-          })
-          .catch(error => {
-            console.log(error);
-            dispatch(getSettingsRejectedAction());
-          });
-      });
-
-  };
-}
-
-export function getSettingsCache() {
-  return dispatch => {
-    dispatch(getSettingsCacheRequestedAction());
-
-    return cache
-      .getSettingsCache()
+      .all([cache.getByType('settings'), cache.getByType('page')])
       .then(results => {
-        dispatch(getSettingsCacheFulfilledAction(results));
+        dispatch(getSettingsFulfilledAction(results));
       })
       .catch(error => {
         console.log(error);
-        dispatch(getSettingsCacheRejectedAction());
+        dispatch(getSettingsRejectedAction());
       });
+
   };
 }
+
 
 function getSettingsRequestedAction() {
   return {
@@ -53,25 +34,6 @@ function getSettingsRejectedAction() {
 function getSettingsFulfilledAction(settings) {
   return {
     type: actionTypes.GetSettingsFulfilled,
-    settings
-  };
-}
-
-function getSettingsCacheRequestedAction() {
-  return {
-    type: actionTypes.GetSettingsCacheRequested
-  };
-}
-
-function getSettingsCacheRejectedAction() {
-  return {
-    type: actionTypes.GetSettingsCacheRejected
-  };
-}
-
-function getSettingsCacheFulfilledAction(settings) {
-  return {
-    type: actionTypes.GetSettingsCacheFulfilled,
     settings
   };
 }

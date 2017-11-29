@@ -1,8 +1,4 @@
 const actionTypes = {
-  ClearCacheRequested: 'CLEAR_CACHE_REQUESTED',
-  ClearCacheRejected: 'CLEAR_CACHE_REJECTED',
-  ClearCacheFulfilled: 'CLEAR_CACHE_FULFILLED',
-
   GetBrotherClubsRequested: 'GET_BROTHER_CLUBS_REQUESTED',
   GetBrotherClubsRejected: 'GET_BROTHER_CLUBS_REJECTED',
   GetBrotherClubsFulfilled: 'GET_BROTHER_CLUBS_FULFILLED',
@@ -19,10 +15,6 @@ const actionTypes = {
   GetSettingsRejected: 'GET_SETTINGS_REJECTED',
   GetSettingsFulfilled: 'GET_SETTINGS_FULFILLED',
 
-  GetSettingsCacheRequested: 'GET_SETTINGS_CACHE_REQUESTED',
-  GetSettingsCacheRejected: 'GET_SETTINGS_CACHE_REJECTED',
-  GetSettingsCacheFulfilled: 'GET_SETTINGS_CACHE_FULFILLED',
-
   GetPageByIDRequested: 'GET_PAGE_BY_ID_REQUESTED',
   GetPageByIDRejected: 'GET_PAGE_BY_ID_REJECTED',
   GetPageByIDFulfilled: 'GET_PAGE_BY_ID_FULFILLED',
@@ -38,6 +30,10 @@ const actionTypes = {
   GetVenuesRequested: 'GET_VENUES_REQUESTED',
   GetVenuesRejected: 'GET_VENUES_REJECTED',
   GetVenuesFulfilled: 'GET_VENUES_FULFILLED',
+
+  SyncRequested: 'SYNC_REQUESTED',
+  SyncRejected: 'SYNC_REJECTED',
+  SyncFulfilled: 'SYNC_FULFILLED',
 };
 
 export default actionTypes;

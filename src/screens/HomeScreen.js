@@ -1,12 +1,10 @@
 import React from 'react';
-import PullToRefresh from 'react-native-simple-ptr';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import store from '../data/store';
 
-import { clearCache } from '../actions/clearCache';
 import { getSettings } from '../actions/getSettings';
 
 import Header from '../components/Header';
@@ -20,26 +18,6 @@ import { colors, dimensions } from '../styles/Variables';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isRefreshing: false,
-    };
-  }
-
-  _onRefresh() {
-    this.setState({
-      isRefreshing: true,
-    });
-
-    store
-      .dispatch(clearCache('settings'))
-      .then(() => {
-        store
-          .dispatch(getSettings())
-          .then(() => {
-            this.setState({isRefreshing: false});
-          });
-      });
   }
 
   render() {
@@ -68,28 +46,23 @@ class HomeScreen extends React.Component {
       );
     }
 
-    const config = Object.entries(settings.data[1])[0][1];
-    const pageList = settings.data[0];
+    const homeGrid = settings.data[0][Object.keys(settings.data[0])[0]].homeGrid;
+    const pageList = settings.data[1];
 
     return (
       <View style={globalStyles.fullsize}>
         <Header/>
-        <PullToRefresh
-          isRefreshing={this.state.isRefreshing}
-          onRefresh={this._onRefresh.bind(this)}
-        >
-          <ScrollView>
-            <View style={styles.homeGrid}>
-            {config.homeGrid.map((item, index) => {
-              const items = [];
+        <ScrollView>
+          <View style={styles.homeGrid}>
+          {homeGrid.map((item, index) => {
+            const items = [];
 
-              items.push(renderGridItem(pageList[item.sys.id], item.sys.id, index));
+            items.push(renderGridItem(pageList[item.sys.id], item.sys.id, index));
 
-              return items;
-            })}
-            </View>
-          </ScrollView>
-        </PullToRefresh>
+            return items;
+          })}
+          </View>
+        </ScrollView>
       </View>
     );
   }

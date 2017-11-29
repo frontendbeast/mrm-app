@@ -7,10 +7,10 @@ export function getVenues() {
 
     return cache
       .get('venues')
-      .then((results) => {
+      .then(results => {
         dispatch(getVenuesFulfilledAction(results));
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         dispatch(getVenuesRejectedAction());
       });

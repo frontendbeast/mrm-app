@@ -3,7 +3,8 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import { getSettings, getSettingsCache } from '../actions/getSettings';
+import { getSettings } from '../actions/getSettings';
+import { sync } from '../actions/sync';
 
 import { colors, dimensions } from '../styles/Variables';
 import globalStyles from '../styles/Styles';
@@ -11,7 +12,7 @@ import globalStyles from '../styles/Styles';
 class Menu extends React.Component {
   componentDidMount() {
     this.props.onGetSettings();
-    this.props.onGetSettingsCache();
+    this.props.onSync();
   }
 
   render () {
@@ -21,8 +22,10 @@ class Menu extends React.Component {
       return null;
     }
 
-    const config = Object.entries(settings.data[1])[0][1];
-    const pageList = settings.data[0];
+    console.log('SETTINGS', settings.data);
+
+    const menu = settings.data[0][Object.keys(settings.data[0])[0]].menu;
+    const pageList = settings.data[1];
 
     const renderLink = (routeName, title, id) => {
       const key = (id) ? id : Math.floor(Math.random() * (100000 + 1));
@@ -38,7 +41,7 @@ class Menu extends React.Component {
 
     return (
       <View style={[globalStyles.fullsize, styles.menu]}>
-        {config.menu.map((item, index) => {
+        {menu.map((item, index) => {
           const items = [];
 
           const page = pageList[item.sys.id];
@@ -59,7 +62,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onGetSettings: () => dispatch(getSettings()),
-  onGetSettingsCache: () => dispatch(getSettingsCache()),
+  onSync: () => dispatch(sync()),
   navigateTo: (routeName, id) => {
     const options = {
       routeName: routeName,
