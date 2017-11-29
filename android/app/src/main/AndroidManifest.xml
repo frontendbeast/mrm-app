@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mrmapp"
+    package="co.darrenhall.mrmapp"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -26,7 +26,12 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="e252c9de26ac97a4ba777b34b5c79c71786d5e66"
+      />
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00BC89C3985149D2A5FBB9E9 /* ZillaSlab-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -34,10 +33,11 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* MRMAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MRMAppTests.m */; };
-		46A42584312E4BE0B7F8B3A9 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48FAA1D48FDB45C8B0E51666 /* libRCTActionSheet.a */; };
 		5D135418FCDC440FAB074126 /* ZillaSlab-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D338A0FA4724617A232A2CD /* ZillaSlab-SemiBold.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9582EBC31F8D37320035154C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9582EBC11F8D37090035154C /* Crashlytics.framework */; };
+		9582EBC41F8D37320035154C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9582EBC01F8D37090035154C /* Fabric.framework */; };
 		CC481949D166458E87CA131D /* ZillaSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */; };
 		5D9B21687D6449E596E61855 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 74D08DAF3F70468F8831987D /* BebasNeue.otf */; };
 /* End PBXBuildFile section */
@@ -284,11 +284,12 @@
 		2D02E47B1E0B4A5D006451C7 /* MRMApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MRMApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* MRMApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MRMApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZillaSlab-Regular.ttf"; path = "../src/assets/fonts/ZillaSlab-Regular.ttf"; sourceTree = "<group>"; };
-		48FAA1D48FDB45C8B0E51666 /* libRCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTActionSheet.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6D338A0FA4724617A232A2CD /* ZillaSlab-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZillaSlab-SemiBold.ttf"; path = "../src/assets/fonts/ZillaSlab-SemiBold.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9582EBC01F8D37090035154C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		9582EBC11F8D37090035154C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZillaSlab-Italic.ttf"; path = "../src/assets/fonts/ZillaSlab-Italic.ttf"; sourceTree = "<group>"; };
 		74D08DAF3F70468F8831987D /* BebasNeue.otf */ = {isa = PBXFileReference; name = "BebasNeue.otf"; path = "../src/assets/fonts/BebasNeue.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
@@ -317,7 +318,8 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				46A42584312E4BE0B7F8B3A9 /* libRCTActionSheet.a in Frameworks */,
+				9582EBC31F8D37320035154C /* Crashlytics.framework in Frameworks */,
+				9582EBC41F8D37320035154C /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +460,8 @@
 		43DBDE749A0E4E5886D5290D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9582EBC11F8D37090035154C /* Crashlytics.framework */,
+				9582EBC01F8D37090035154C /* Fabric.framework */,
 				C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */,
 				36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */,
 				6D338A0FA4724617A232A2CD /* ZillaSlab-SemiBold.ttf */,
@@ -519,6 +523,7 @@
 				00E356EF1AD99517003FC87E /* MRMAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				43DBDE749A0E4E5886D5290D /* Resources */,
+				9582EBC21F8D37320035154C /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -533,6 +538,13 @@
 				2D02E4901E0B4A5D006451C7 /* MRMApp-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9582EBC21F8D37320035154C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +576,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				9582EBA21F8D36D30035154C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -626,6 +639,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 35CBQ7MEPM;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -977,6 +991,19 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		9582EBA21F8D36D30035154C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run e252c9de26ac97a4ba777b34b5c79c71786d5e66 d4bb28a65010899d85df6257ffd0356afe9c059feefae4761698222d94648635\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1076,9 +1103,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 35CBQ7MEPM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MRMApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1087,8 +1121,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.darrenhall.mrm-app";
+				PRODUCT_BUNDLE_IDENTIFIER = co.darrenhall.mrmapp;
 				PRODUCT_NAME = MRMApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1098,8 +1133,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 35CBQ7MEPM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MRMApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1108,8 +1150,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.darrenhall.mrm-app";
+				PRODUCT_BUNDLE_IDENTIFIER = co.darrenhall.mrmapp;
 				PRODUCT_NAME = MRMApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

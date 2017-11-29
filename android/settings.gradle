@@ -1,3 +1,3 @@
-rootProject.name = 'MRMApp'
+rootProject.name = 'MRM 9'
 
 include ':app'
