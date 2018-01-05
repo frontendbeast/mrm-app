@@ -30,7 +30,7 @@ const cache = {
 
   sync: async () => {
     const nextSyncToken = await _getItem('nextSyncToken');
-    const options = (nextSyncToken === null) ? {'nextSyncToken': nextSyncToken} : {'initial': true};
+    const options = (nextSyncToken !== null) ? {'nextSyncToken': nextSyncToken} : {'initial': true};
 
     const set = [];
     const types = [];

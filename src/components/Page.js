@@ -51,7 +51,6 @@ export default class Page extends React.Component {
 
   render() {
     const { pages, id, title } = this.props;
-    console.log('LOADING', pages.loading, new Date());
 
     if ((pages.loading === undefined || pages.loading) && !pages.data) {
       return (

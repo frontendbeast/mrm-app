@@ -40,7 +40,7 @@ class HomeScreen extends React.Component {
       );
     };
 
-    if(!settings || !settings.data) {
+    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1]) {
       return (
         <Loading />
       );

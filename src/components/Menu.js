@@ -18,7 +18,7 @@ class Menu extends React.Component {
   render () {
     const { settings } = this.props;
 
-    if(!settings || !settings.data) {
+    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1]) {
       return null;
     }
 
