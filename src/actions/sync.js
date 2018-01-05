@@ -1,14 +1,46 @@
 import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 
+import { getBrotherClubs } from './getBrotherClubs';
+import { getEvents } from './getEvents';
+import { getPages } from './getPages';
+import { getPersons } from './getPersons';
+import { getSettings } from './getSettings';
+import { getVenues } from './getVenues';
+
 export function sync() {
   return dispatch => {
     dispatch(syncRequestedAction());
 
     return cache
       .sync()
-      .then(() => {
+      .then(results => {
         dispatch(syncFulfilledAction());
+
+        if (results.includes('brotherClub')) {
+          dispatch(getBrotherClubs());
+        }
+
+        if (results.includes('event')) {
+          dispatch(getEvents());
+        }
+
+        if (results.includes('page')) {
+          dispatch(getPages());
+        }
+
+        if (results.includes('person')) {
+          dispatch(getPersons());
+        }
+
+        if (results.includes('settings')) {
+          dispatch(getSettings());
+        }
+
+        if (results.includes('venue')) {
+          dispatch(getSettings());
+        }
+
       })
       .catch(error => {
         console.log(error);
@@ -17,7 +49,6 @@ export function sync() {
 
   };
 }
-
 
 function syncRequestedAction() {
   return {

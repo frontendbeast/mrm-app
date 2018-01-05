@@ -6,7 +6,7 @@ export function getBrotherClubs() {
     dispatch(getBrotherClubsRequestedAction());
 
     return cache
-      .getAll('brotherClubs')
+      .getByType('brotherClub')
       .then(results => {
         dispatch(getBrotherClubsFulfilledAction(results));
       })

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
-import Markdown, {getUniqueID} from 'react-native-markdown-renderer';
+import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
@@ -39,28 +39,21 @@ export default class Page extends React.Component {
     this.scrollView;
   }
 
+  componentWillMount() {
+    this.props.onGetPages();
+  }
+
   componentDidUpdate() {
     if(this.scrollView) {
-      this.scrollView.scrollTo({y: 0, animated: false});
-    }
-  }
-
-  componentWillMount() {
-    if (this.props.id) {
-      this.props.onGetPageByID(this.props.id);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.id && nextProps.id !== this.props.id) {
-      this.props.onGetPageByID(nextProps.id);
+      this.scrollView.scrollTo({x: 0, y: 0, animated: false});
     }
   }
 
   render() {
     const { pages, id, title } = this.props;
+    console.log('LOADING', pages.loading, new Date());
 
-    if (((pages.loading === undefined || pages.loading) && !pages.data) || !pages.data[id]) {
+    if ((pages.loading === undefined || pages.loading) && !pages.data) {
       return (
         <Loading />
       );

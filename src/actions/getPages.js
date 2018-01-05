@@ -1,37 +1,37 @@
 import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 
-export function getPageByID(id) {
+export function getPages(id) {
   return dispatch => {
-    dispatch(getPageByIDRequestedAction());
+    dispatch(getPagesRequestedAction());
 
     return cache
-      .getByAttribute('pages', 'id', id, 1)
+      .getByType('page')
       .then(results => {
-        dispatch(getPageByIDFulfilledAction(results));
+        dispatch(getPagesFulfilledAction(results));
       })
       .catch(error => {
         console.log(error);
-        dispatch(getPageByIDRejectedAction());
+        dispatch(getPagesRejectedAction());
       });
   };
 }
 
-function getPageByIDRequestedAction() {
+function getPagesRequestedAction() {
   return {
-    type: actionTypes.GetPageByIDRequested
+    type: actionTypes.GetPagesRequested
   };
 }
 
-function getPageByIDRejectedAction() {
+function getPagesRejectedAction() {
   return {
-    type: actionTypes.GetPageByIDRejected
+    type: actionTypes.GetPagesRejected
   };
 }
 
-function getPageByIDFulfilledAction(pages) {
+function getPagesFulfilledAction(pages) {
   return {
-    type: actionTypes.GetPageByIDFulfilled,
+    type: actionTypes.GetPagesFulfilled,
     pages
   };
 }

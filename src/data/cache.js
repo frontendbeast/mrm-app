@@ -1,19 +1,17 @@
 import { AsyncStorage } from 'react-native';
 
-import { merge, pickBy } from 'lodash';
-
 import database from './database';
 
 const cache = {
-  getByType: async (query) => {
+  getByType: async (type) => {
     return new Promise(async(resolve, reject) => {
-      _getItem(query).then(item => {
+      _getItem(type).then(item => {
         const array = (item !== null) ? JSON.parse(item) : [];
         _getItems(array).then(items => {
           const results = {};
 
           items.forEach(([key, value]) => {
-            results[key] = (!value) ? [] : JSON.parse(value);
+            results[key] = (!value) ? {} : JSON.parse(value);
           });
 
           resolve(results);
@@ -32,7 +30,7 @@ const cache = {
 
   sync: async () => {
     const nextSyncToken = await _getItem('nextSyncToken');
-    const options = (nextSyncToken !== null) ? {'nextSyncToken': nextSyncToken} : {'initial': true};
+    const options = (nextSyncToken === null) ? {'nextSyncToken': nextSyncToken} : {'initial': true};
 
     const set = [];
     const types = [];
@@ -40,90 +38,99 @@ const cache = {
     const update = {};
     const remove = {};
 
-    database
-      .sync(options)
-      .then(async results => {
-        console.log('RESULTS', results);
+    return new Promise(async(resolve, reject) => {
 
-        // Process entries
-        results.entries.forEach(entry => {
-          const type = entry.sys.contentType.sys.id;
+      database
+        .sync(options)
+        .then(async results => {
+          // console.log(results);
 
-          // Keep track of content types to update indexes
-          if(!types.includes(type)) {
-            types.push(type);
-          }
+          // Process entries
+          results.entries.forEach(entry => {
+            const type = entry.sys.contentType.sys.id;
 
-          // Format data
-          update[entry.sys.id] = _processEntry(entry);
-        });
-
-        const removal = [];
-
-        // Create an array of entries being removed
-        results.deletedEntries.forEach(async entry => {
-          removal.push(entry.sys.id);
-        });
-
-        // Get details of each entry being removed
-        _getItems(removal).then(entries => {
-
-          entries.forEach(([key, value]) => {
-            remove[key] = (!value) ? [] : JSON.parse(value);
-
-            if(!types.includes(remove[key].type)) {
-              types.push(remove[key].type);
+            // Keep track of content types to update indexes
+            if(!types.includes(type)) {
+              types.push(type);
             }
+
+            // Format data
+            update[entry.sys.id] = _processEntry(entry);
           });
 
-          const indexes = {};
+          const removal = [];
 
-          // Get current indexes for content types
-          _getItems(types).then(async types => {
+          // Create an array of entries being removed
+          results.deletedEntries.forEach(async entry => {
+            removal.push(entry.sys.id);
+          });
 
-            types.forEach(([key, value]) => {
-              indexes[key] = (!value) ? [] : JSON.parse(value);
-            });
+          // Get details of each entry being removed
+          _getItems(removal).then(entries => {
 
-            Object.entries(update).forEach(([key, entry]) => {
-              // If new entry, add to index
-              if(!indexes[entry.type].includes(key)) {
-                indexes[entry.type].push(key);
+            entries.forEach(([key, value]) => {
+              remove[key] = (!value) ? [] : JSON.parse(value);
+
+              if(!types.includes(remove[key].type)) {
+                types.push(remove[key].type);
               }
             });
 
-            // Remove deleted entries from index
-            Object.entries(remove).forEach(([key, entry]) => {
-              indexes[entry.type] = indexes[entry.type].filter(item => item != key);
+            const indexes = {};
+
+            // Get current indexes for content types
+            _getItems(types).then(async typesIndexes => {
+
+              typesIndexes.forEach(([key, value]) => {
+                indexes[key] = (!value) ? [] : JSON.parse(value);
+              });
+
+              Object.entries(update).forEach(([key, entry]) => {
+                // If new entry, add to index
+                if(!indexes[entry.type].includes(key)) {
+                  indexes[entry.type].push(key);
+                }
+              });
+
+              // Remove deleted entries from index
+              Object.entries(remove).forEach(([key, entry]) => {
+                indexes[entry.type] = indexes[entry.type].filter(item => item != key);
+              });
+
+              // Add indexes to update
+              Object.entries(indexes).forEach(([key, value]) => {
+                update[key] = value;
+              });
+
+              // console.log('UPDATE', update);
+              // console.log('REMOVE', remove);
+
+              // Track sync
+              update['nextSyncToken'] = results.nextSyncToken;
+
+              // Save to AsyncStorage
+              Object.entries(update).forEach(([key, value]) => {
+                const data = (typeof value === 'object' || typeof value === 'array') ? JSON.stringify(value) : value;
+                set.push([key, data]);
+              });
+
+              // console.log('TYPES', types);
+              // console.log('SET', set);
+
+              await _removeItems(removal);
+              await _setItems(set);
+
+              resolve(types);
             });
-
-            // Add indexes to update
-            Object.entries(indexes).forEach(([key, value]) => {
-              update[key] = value;
-            });
-
-            console.log('UPDATE', update);
-            console.log('REMOVE', remove);
-
-            // Track sync
-            update['nextSyncToken'] = results.nextSyncToken;
-
-            // Save to AsyncStorage
-            Object.entries(update).forEach(([key, value]) => {
-              const data = (typeof value === 'object' || typeof value === 'array') ? JSON.stringify(value) : value;
-              set.push([key, data]);
-            });
-
-            console.log('SET', set);
-
-            await _removeItems(removal);
-            await _setItems(set);
 
           });
 
+        })
+        .catch((error) => {
+          console.error(error);
+          reject(error);
         });
-
-      });
+    });
   }
 };
 

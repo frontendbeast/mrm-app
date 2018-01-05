@@ -11,10 +11,6 @@ export default class EventDetail extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.onGetEventByID(this.props.id);
-  }
-
   render() {
     const { events, id } = this.props;
 

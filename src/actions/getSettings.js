@@ -18,7 +18,6 @@ export function getSettings() {
   };
 }
 
-
 function getSettingsRequestedAction() {
   return {
     type: actionTypes.GetSettingsRequested

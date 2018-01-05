@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { getEventByID } from '../actions/getEvents';
 import EventDetail from '../components/EventDetail';
 
 function mapStateToProps(state) {
@@ -11,8 +10,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetEventByID: (id) => dispatch(getEventByID(id)),
-   };
+
+  };
 }
 
 const EventDetailContainer = connect(mapStateToProps, mapDispatchToProps)(EventDetail);

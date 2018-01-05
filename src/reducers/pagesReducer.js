@@ -4,13 +4,13 @@ import actionTypes from '../constants/actionTypes';
 
 const pagesReducer = (state = {}, action) => {
   switch (action.type) {
-    case actionTypes.GetPageByIDRequested: {
+    case actionTypes.GetPagesRequested: {
       return merge({}, state, { loading: true });
     }
-    case actionTypes.GetPageByIDRejected: {
+    case actionTypes.GetPagesRejected: {
       return merge({}, state, { error: 'Error getting page by ID', loading: false });
     }
-    case actionTypes.GetPageByIDFulfilled: {
+    case actionTypes.GetPagesFulfilled: {
       return merge({}, state, { data: action.pages, error: false, loading: false });
     }
     default:

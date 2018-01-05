@@ -22,8 +22,6 @@ class Menu extends React.Component {
       return null;
     }
 
-    console.log('SETTINGS', settings.data);
-
     const menu = settings.data[0][Object.keys(settings.data[0])[0]].menu;
     const pageList = settings.data[1];
 

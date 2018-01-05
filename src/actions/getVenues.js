@@ -6,7 +6,7 @@ export function getVenues() {
     dispatch(getVenuesRequestedAction());
 
     return cache
-      .get('venues')
+      .getByType('venue')
       .then(results => {
         dispatch(getVenuesFulfilledAction(results));
       })

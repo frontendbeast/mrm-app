@@ -6,29 +6,13 @@ export function getPersons() {
     dispatch(getPersonsRequestedAction());
 
     return cache
-      .getAll('persons')
+      .getByType('person')
       .then(results => {
         dispatch(getPersonsFulfilledAction(results));
       })
       .catch(error => {
         console.log(error);
         dispatch(getPersonsRejectedAction());
-      });
-  };
-}
-
-export function getPersonByID(id) {
-  return dispatch => {
-    dispatch(getPersonByIDRequestedAction());
-
-    return cache
-      .getByAttribute('persons', 'id', id, 1)
-      .then(results => {
-        dispatch(getPersonByIDFulfilledAction(results));
-      })
-      .catch(error => {
-        console.log(error);
-        dispatch(getPersonByIDRejectedAction());
       });
   };
 }
@@ -48,25 +32,6 @@ function getPersonsRejectedAction() {
 function getPersonsFulfilledAction(persons) {
   return {
     type: actionTypes.GetPersonsFulfilled,
-    persons
-  };
-}
-
-function getPersonByIDRequestedAction() {
-  return {
-    type: actionTypes.GetPersonByIDRequested
-  };
-}
-
-function getPersonByIDRejectedAction() {
-  return {
-    type: actionTypes.GetPersonByIDRejected
-  };
-}
-
-function getPersonByIDFulfilledAction(persons) {
-  return {
-    type: actionTypes.GetPersonByIDFulfilled,
     persons
   };
 }

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { getPersonByID } from '../actions/getPersons';
 import TeamDetail from '../components/TeamDetail';
 
 function mapStateToProps(state) {
@@ -11,8 +10,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetPersonByID: (id) => dispatch(getPersonByID(id)),
-   };
+
+  };
 }
 
 const TeamDetailContainer = connect(mapStateToProps, mapDispatchToProps)(TeamDetail);

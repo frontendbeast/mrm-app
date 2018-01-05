@@ -12,10 +12,6 @@ export default class TeamDetail extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.onGetPersonByID(this.props.id);
-  }
-
   render() {
     const { persons, id } = this.props;
 
