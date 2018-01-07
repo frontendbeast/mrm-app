@@ -117,7 +117,10 @@ const cache = {
               // console.log('TYPES', types);
               // console.log('SET', set);
 
-              await _removeItems(removal);
+              if (removal.length) {
+                await _removeItems(removal);
+              }
+
               await _setItems(set);
 
               resolve(types);
