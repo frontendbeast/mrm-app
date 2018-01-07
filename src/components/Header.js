@@ -1,27 +1,30 @@
 import React from 'react';
 import { Image, TouchableOpacity, Text, View } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { colors, dimensions } from '../styles/Variables';
 
 const Header = ({ openDrawer, dismiss, title, back }) => (
-  <View style={styles.header}>
-    <View style={styles.headerContainer}>
-    {back ?
-      <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
-        <Text>Back</Text>
-      </TouchableOpacity> :
-      <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
-        <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
-      </TouchableOpacity>
-    }
-    <View style={{}}>
-      <Image source={require('../assets/images/logo.png')} style={styles.headerLogo} resizeMode="contain" />
+
+  <SafeAreaView style={{backgroundColor: '#000'}}>
+    <View style={styles.header}>
+      <View style={styles.headerContainer}>
+      {back ?
+        <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
+          <Text>Back</Text>
+        </TouchableOpacity> :
+        <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
+          <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
+        </TouchableOpacity>
+      }
+      <View style={{}}>
+        <Image source={require('../assets/images/logo.png')} style={styles.headerLogo} resizeMode="contain" />
+      </View>
+      <View style={styles.headerSpacer} />
+      </View>
     </View>
-    <View style={styles.headerSpacer} />
-    </View>
-  </View>
+  </SafeAreaView>
 );
 
 const mapStateToProps = state => ({  });
@@ -38,7 +41,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header);
 const styles = {
   header: {
     backgroundColor: '#000',
-    paddingTop: dimensions.statusBarHeight,
   },
   headerContainer: {
     backgroundColor: colors.header,
