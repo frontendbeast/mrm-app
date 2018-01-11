@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Animated, Image, View } from 'react-native';
+import { Animated, Image, View, ViewPropTypes } from 'react-native';
 
 import PropTypes from 'prop-types';
 
@@ -11,7 +11,7 @@ export default class ImageLoader extends React.Component {
     imgSize: PropTypes.number,
     resizeMode: PropTypes.string,
     source: PropTypes.string.isRequired,
-    style: PropTypes.object,
+    style: ViewPropTypes.style,
     width: PropTypes.number,
   };
 
@@ -86,19 +86,16 @@ export default class ImageLoader extends React.Component {
     const { backgroundColor, imgSize, resizeMode, source, style } = this.props;
 
     return (
-      <View style={[styles.imageContainer, { backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`}, style]}>
-        <Animated.Image style={[styles.image, {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} blurRadius={1} onLoad={this.onLoadThumb}/>
-        <Animated.Image style={[styles.image, {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
+      <View style={[{ backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`, position: 'relative'}, style]}>
+        <Animated.Image style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} blurRadius={1} onLoad={this.onLoadThumb}/>
+        <Animated.Image style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>
     );
   }
 }
 
 const styles = {
-  imageContainer: {
-    position: 'relative',
-  },
-  image: {
+  'image': {
     bottom: 0,
     left: 0,
     position: 'absolute',

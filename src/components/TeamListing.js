@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
-import { colors, dimensions } from '../styles/Variables';
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
+import componentStyles from '../styles/teamListing';
 
 class TeamListing extends React.Component {
   constructor(props) {
@@ -31,20 +31,20 @@ class TeamListing extends React.Component {
       .sort((a, b) => { return Date.parse(b.name) - Date.parse(a.name); });
 
     return (
-      <View style={globalStyles.fullsize}>
-        <View style={styles.persons}>
+      <View style={sharedStyles['fullsize']}>
+        <View style={componentStyles['persons']}>
           {items.map((person, index) => {
             return (
               <TouchableOpacity
                 key={person.id}
-                style={[styles.person, index === items.length - 1 && styles['person--last']]}
+                style={[componentStyles['person'], index === items.length - 1 && componentStyles['person--last']]}
                 onPress={() => { this.props.viewDetail(person.id); }}
               >
-                <View style={styles.person__photo}>
+                <View style={componentStyles['person__photo']}>
                   <ImageLoader source={`https:${person.photo.file.url}`} height={300} width={400} imgSize={325} />
                 </View>
-                <View style={styles.person__link}>
-                  <Text style={styles.person__name}>{ person.name }</Text>
+                <View style={componentStyles['person__link']}>
+                  <Text style={componentStyles['person__name']}>{ person.name }</Text>
                 </View>
               </TouchableOpacity>
             );
@@ -63,23 +63,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamListing);
-
-const styles = {
-  'persons': {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '100%',
-  },
-  'person': {
-    aspectRatio: 1,
-    width: '50%',
-  },
-  'person__link': {
-    borderBottomWidth: 0,
-    padding: dimensions.gutter,
-  },
-  'person__name': {
-    fontWeight: 'bold',
-  }
-};

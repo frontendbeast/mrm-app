@@ -9,7 +9,7 @@ import { getPersons } from '../actions/getPersons';
 import Header from '../components/Header';
 import TeamListingContainer from '../containers/TeamListingContainer';
 
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class TeamListingScreen extends React.Component {
   constructor(props) {
@@ -18,9 +18,9 @@ export default class TeamListingScreen extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.fullsize}>
+      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView contentContainerStyle={{minHeight: '100%'}}>
+        <ScrollView contentContainerStyle={sharedStyles['fullsize']}>
           <TeamListingContainer/>
         </ScrollView>
       </View>

@@ -5,8 +5,9 @@ import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
-import globalStyles from '../styles/Styles';
-import markdownStyles from '../styles/Markdown';
+import componentStyles from '../styles/page';
+import sharedStyles from '../styles/shared';
+import markdownStyles from '../styles/markdown';
 
 const rules = {
   blockquote: (node, children, parent, styles) =>
@@ -17,7 +18,7 @@ const rules = {
       </Text>
     </View>,
   img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={{marginLeft: -16, marginRight: -16}} />;
+    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['pageImage']} />;
   },
   p: (node, children, parent, styles) => {
     const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
@@ -62,25 +63,25 @@ export default class Page extends React.Component {
 
     return (
       <ScrollView ref={ScrollView => this.scrollView = ScrollView}>
-        <View key={id}>
+        <View key={id} style={componentStyles['page-content']}>
         {page.image ?
           <View>
-            <View style={{position: 'absolute', left: 0, right: 0, zIndex: 1}}>
-              <View style={{flex: 1, alignItems:'center'}}>
-                <Text style={{backgroundColor: '#fd0', color: '#222', fontFamily: 'BebasNeue', fontSize: 40, paddingBottom: 10, paddingLeft: 15, paddingRight: 15, paddingTop: 10, marginTop: 36}}>{page.title.toUpperCase()}</Text>
+            <View style={componentStyles['page-masthead__container']}>
+              <View style={componentStyles['page-masthead__centered']}>
+                <Text style={componentStyles['page-masthead__text']}>{page.title.toUpperCase()}</Text>
               </View>
             </View>
             <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />
           </View>
         : null}
-          <View style={globalStyles.container}>
+          <View style={sharedStyles.container}>
             {page.intro ?
-              <View key={'blockQuote'} style={[markdownStyles.blockquote, markdownStyles.blockquoteAlt, {marginTop: -54}]}>
-                <Image source={require('../assets/images/quote-alt.png')} style={[markdownStyles.blockquoteImg, {zIndex: 1}]} resizeMode="contain" />
+              <View key={'blockQuote'} style={[markdownStyles.blockquote, markdownStyles.blockquoteAlt, componentStyles['page-masthead__blockquote']]}>
+                <Image source={require('../assets/images/quote-alt.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
                 <Text style={[markdownStyles.blockquoteText, markdownStyles.blockquoteTextAlt]}>{page.intro}</Text>
               </View>
             : null}
-            <Markdown style={markdownStyles} rules={rules}>{ page.copy }</Markdown>
+            <Markdown style={markdownStyles} rules={rules}>{page.copy}</Markdown>
           </View>
         </View>
       </ScrollView>

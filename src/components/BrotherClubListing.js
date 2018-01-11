@@ -3,8 +3,7 @@ import { Text, View } from 'react-native';
 
 import Loading from './Loading';
 
-import { colors, dimensions } from '../styles/Variables';
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class BrotherClubListing extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ export default class BrotherClubListing extends React.Component {
       .sort((a, b) => { return Date.parse(b.name) - Date.parse(a.name); });
 
     return (
-      <View style={globalStyles.fullsize}>
+      <View style={sharedStyles['fullsize']}>
         <View>
           {items.map((club, index) => {
             return (

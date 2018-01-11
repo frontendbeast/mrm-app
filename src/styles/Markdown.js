@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import  { colors } from './variables';
+
 const markdownStyles = StyleSheet.create({
   blockquote: {
     marginTop: 24,
@@ -14,8 +16,11 @@ const markdownStyles = StyleSheet.create({
     position: 'absolute',
     top: -6.5,
     width: 20,
+    zIndex: 1,
   },
   blockquoteText: {
+    backgroundColor: colors.textBG,
+    color: colors.text,
     fontFamily: 'ZillaSlab-Italic',
     fontSize: 24,
     lineHeight: 34,
@@ -25,8 +30,8 @@ const markdownStyles = StyleSheet.create({
     paddingTop: 20,
   },
   blockquoteTextAlt: {
-    backgroundColor: '#222',
-    color: '#fff',
+    backgroundColor: colors.text,
+    color: colors.textBG,
   },
   em: {
     fontFamily: 'ZillaSlab-Italic',
@@ -36,12 +41,14 @@ const markdownStyles = StyleSheet.create({
     marginTop: 12,
   },
   paragraph: {
-    color: '#222',
+    color: colors.text,
     fontFamily: 'ZillaSlab-Regular',
     fontSize: 18,
     lineHeight: 27,
-    marginBottom: 12,
-    marginTop: 12,
+    marginBottom: 8,
+    marginTop: 8,
+    paddingBottom: 2,
+    paddingTop: 2,
   },
   strong: {
     fontFamily: 'ZillaSlab-SemiBold',

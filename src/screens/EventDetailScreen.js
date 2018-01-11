@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native';
 import Header from '../components/Header';
 import EventDetailContainer from '../containers/EventDetailContainer';
 
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class EventDetailScreen extends React.Component {
   constructor(props) {
@@ -13,9 +13,9 @@ export default class EventDetailScreen extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.fullsize}>
+      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
         <Header back={true}/>
-        <ScrollView contentContainerStyle={{minHeight: '100%'}}>
+        <ScrollView contentContainerStyle={sharedStyles['fullsize']}>
           <EventDetailContainer id={this.props.navigation.state.params.id} />
         </ScrollView>
       </View>

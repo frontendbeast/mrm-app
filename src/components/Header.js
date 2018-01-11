@@ -3,25 +3,25 @@ import { Image, TouchableOpacity, Text, View } from 'react-native';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { colors, dimensions } from '../styles/Variables';
+import componentStyles from '../styles/header';
 
 const Header = ({ openDrawer, dismiss, title, back }) => (
 
   <SafeAreaView style={{backgroundColor: '#000'}}>
-    <View style={styles.header}>
-      <View style={styles.headerContainer}>
+    <View style={componentStyles['header']}>
+      <View style={componentStyles['header__container']}>
       {back ?
-        <TouchableOpacity style={styles.headerNavButton} onPress={dismiss}>
+        <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
           <Text>Back</Text>
         </TouchableOpacity> :
-        <TouchableOpacity style={styles.headerNavButton} onPress={openDrawer}>
+        <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
           <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
         </TouchableOpacity>
       }
       <View style={{}}>
-        <Image source={require('../assets/images/logo.png')} style={styles.headerLogo} resizeMode="contain" />
+        <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
       </View>
-      <View style={styles.headerSpacer} />
+      <View style={componentStyles.header__spacer} />
       </View>
     </View>
   </SafeAreaView>
@@ -37,29 +37,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-const styles = {
-  header: {
-    backgroundColor: '#000',
-  },
-  headerContainer: {
-    backgroundColor: colors.header,
-    flexDirection: 'row',
-  },
-  headerLogo :{
-    marginTop:  dimensions.gutter - 1,
-    width: 150,
-  },
-  headerNavButton: {
-    alignSelf: 'flex-start',
-    flex: 1,
-    padding: dimensions.gutter,
-    width: 30,
-  },
-  headerSpacer: {
-    alignSelf: 'flex-end',
-    flex: 1,
-    padding: dimensions.gutter,
-    width: 30,
-  }
-};

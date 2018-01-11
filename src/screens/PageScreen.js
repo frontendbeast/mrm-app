@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import PullToRefresh from 'react-native-simple-ptr';
 
 import store from '../data/store';
@@ -9,7 +9,7 @@ import { getPages } from '../actions/getPages';
 import Header from '../components/Header';
 import PagesContainer from '../containers/PagesContainer';
 
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class PageScreen extends React.Component {
   constructor(props) {
@@ -18,11 +18,9 @@ export default class PageScreen extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.fullsize}>
+      <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView contentContainerStyle={{minHeight: '100%'}}>
-          <PagesContainer id={this.props.navigation.state.params.id} />
-        </ScrollView>
+        <PagesContainer id={this.props.navigation.state.params.id} />
       </View>
     );
   }

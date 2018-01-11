@@ -9,7 +9,7 @@ import { getBrotherClubs } from '../actions/getBrotherClubs';
 import Header from '../components/Header';
 import BrotherClubListingContainer from '../containers/BrotherClubListingContainer';
 
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class BrotherClubListingScreen extends React.Component {
   constructor(props) {
@@ -18,9 +18,9 @@ export default class BrotherClubListingScreen extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.fullsize}>
+      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView contentContainerStyle={{minHeight: '100%'}}>
+        <ScrollView contentContainerStyle={sharedStyles['fullsize']}>
           <BrotherClubListingContainer/>
         </ScrollView>
       </View>

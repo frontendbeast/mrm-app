@@ -16,6 +16,8 @@ export const palette = {
 };
 
 export const colors = {
+  appBG: '#000',
+
   header: palette.tertiary,
 
   homeGridTextBG: paletteMaster.white,
@@ -26,10 +28,13 @@ export const colors = {
   listItemHeader: palette.tertiary,
   listItemHeaderText: palette.tertiaryText,
   listItemBorder: paletteMaster.grey,
+  listItemText: palette.primaryText,
+
+  text: paletteMaster.black,
+  textBG: paletteMaster.white,
 };
 
 export const dimensions = {
   fontSizeHeader: 16,
   gutter: 16,
-  statusBarHeight: 20,
 };

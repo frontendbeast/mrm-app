@@ -4,8 +4,7 @@ import { Image, Text, View } from 'react-native';
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
-import { colors, dimensions } from '../styles/Variables';
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
 
 export default class TeamDetail extends React.Component {
   constructor(props) {
@@ -26,15 +25,11 @@ export default class TeamDetail extends React.Component {
         { person.photo.file ?
           <ImageLoader source={`https:${person.photo.file.url}`} height={300} width={400} />
         : null }
-        <View style={globalStyles.container}>
-          <Text style={globalStyles.heading}>{ person.name }</Text>
+        <View style={sharedStyles['container']}>
+          <Text style={sharedStyles['heading']}>{ person.name }</Text>
           <Text>{ person.biography }</Text>
         </View>
       </View>
     );
   }
 }
-
-const styles = {
-
-};

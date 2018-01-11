@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, SafeAreaView } from 'react-navigation';
 
 import { getSettings } from '../actions/getSettings';
 import { sync } from '../actions/sync';
 
-import { colors, dimensions } from '../styles/Variables';
-import globalStyles from '../styles/Styles';
+import sharedStyles from '../styles/shared';
+import componentStyles from '../styles/menu';
 
 class Menu extends React.Component {
   componentDidMount() {
@@ -30,7 +30,7 @@ class Menu extends React.Component {
 
       return (
         <TouchableOpacity key={key} onPress={() => { this.props.navigateTo(routeName, id); }}>
-          <View style={styles.menu__link}>
+          <View style={componentStyles['menu__link']}>
             <Text>{title}</Text>
           </View>
         </TouchableOpacity>
@@ -38,7 +38,7 @@ class Menu extends React.Component {
     };
 
     return (
-      <View style={[globalStyles.fullsize, styles.menu]}>
+      <SafeAreaView style={sharedStyles['fullsize']}>
         {menu.map((item, index) => {
           const items = [];
 
@@ -49,7 +49,7 @@ class Menu extends React.Component {
 
           return items;
         })}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -75,12 +75,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
-
-const styles = {
-  'menu': {
-    paddingTop: dimensions.gutter,
-  },
-  'menu__link': {
-    padding: dimensions.gutter,
-  }
-};
