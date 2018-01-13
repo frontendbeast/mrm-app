@@ -1,6 +1,7 @@
 import React from 'react';
+import { BackHandler } from 'react-native';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
+import { addNavigationHelpers, DrawerNavigator, NavigationActions } from 'react-navigation';
 
 import PropTypes from 'prop-types';
 
@@ -23,17 +24,57 @@ export const AppNavigator = DrawerNavigator({
   initialRouteName: 'Home',
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={ addNavigationHelpers({ dispatch, state: nav }) } />
-);
+class AppWithNavigationState extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired,
+  };
+
+  onBackPress = () => {
+    const { dispatch, nav } = this.props;
+
+    console.log('APP NAV', nav);
+
+    if (nav.index === 1) {
+      dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
+      return true;
+    } else
+
+    if (nav.index === 0) {
+      const route =  nav.routes[0];
+
+      const index = nav.routes[0].index;
+      const routes = nav.routes[0].routes;
+
+      dispatch(NavigationActions.navigate({ routeName: 'Home' }));
+
+      if (routes[index].routeName !== 'Home') {
+        return true;
+      }
+    }
+  }
+
+  componentWillMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.onBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress)
+  }
+
+  render() {
+    const { dispatch, nav } = this.props
+    const navigation = addNavigationHelpers({
+        dispatch,
+        state: nav
+    })
+
+    return <AppNavigator navigation={navigation} />
+  }
+};
 
 const mapStateToProps = state => ({
   nav: state.nav,
 });
-
-AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps)(AppWithNavigationState);
