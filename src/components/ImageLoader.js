@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Animated, Image, View, ViewPropTypes } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
 
 import PropTypes from 'prop-types';
 
@@ -63,7 +64,7 @@ export default class ImageLoader extends React.Component {
 
   onLoadLarge = (event) => {
     const now = new Date();
-    const duration = (now - this.loadTimeLarge > 75) ? 250 : 0;
+    const duration = (now - this.loadTimeLarge > 200) ? 250 : 0;
 
     Animated.timing(this.state.opacityLarge, {
       toValue: 1,
@@ -73,7 +74,7 @@ export default class ImageLoader extends React.Component {
 
   onLoadThumb = (event) => {
     const now = new Date();
-    const duration = (now - this.loadTimeThumb > 75) ? 250 : 0;
+    const duration = (now - this.loadTimeThumb > 200) ? 250 : 0;
 
     Animated.timing(this.state.opacityThumb, {
       toValue: 1,
@@ -85,10 +86,12 @@ export default class ImageLoader extends React.Component {
     const { height, opacityThumb, opacityLarge, width } = this.state;
     const { backgroundColor, imgSize, resizeMode, source, style } = this.props;
 
+    const AnimatedCachedImage = Animated.createAnimatedComponent(CachedImage);
+
     return (
       <View style={[{ backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`, position: 'relative'}, style]}>
-        <Animated.Image style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} blurRadius={1} onLoad={this.onLoadThumb}/>
-        <Animated.Image style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
+        <AnimatedCachedImage style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} onLoad={this.onLoadThumb} blurRadius={1}/>
+        <AnimatedCachedImage style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>
     );
   }

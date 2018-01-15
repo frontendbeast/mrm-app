@@ -18,7 +18,7 @@ const rules = {
       </Text>
     </View>,
   img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['pageImage']} />;
+    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} />;
   },
   p: (node, children, parent, styles) => {
     const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
