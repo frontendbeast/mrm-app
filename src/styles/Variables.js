@@ -1,4 +1,4 @@
-const paletteMaster = {
+const palette = {
   black: '#222',
   grey: '#ccc',
   red: '#b81a1b',
@@ -6,32 +6,23 @@ const paletteMaster = {
   yellow: '#fd0',
 };
 
-export const palette = {
-  primary: paletteMaster.yellow,
-  primaryText: paletteMaster.black,
-  secondary: paletteMaster.red,
-  secondaryText: paletteMaster.white,
-  tertiary: paletteMaster.black,
-  tertiaryText: paletteMaster.yellow,
-};
-
 export const colors = {
-  appBG: '#000',
+  appBG: palette.black,
 
-  header: palette.tertiary,
+  header: palette.black,
 
-  homeGridTextBG: paletteMaster.white,
-  homeGridText: paletteMaster.black,
-  homeGridTextFeatureBG: palette.primary,
-  homeGridTextFeature: palette.primaryText,
+  homeGridTextBG: palette.white,
+  homeGridText: palette.black,
+  homeGridTextFeatureBG: palette.yellow,
+  homeGridTextFeature: palette.black,
 
-  listItemHeader: palette.tertiary,
-  listItemHeaderText: palette.tertiaryText,
-  listItemBorder: paletteMaster.grey,
-  listItemText: palette.primaryText,
+  listItemHeader: palette.black,
+  listItemHeaderText: palette.yellow,
+  listItemBorder: palette.grey,
+  listItemText: palette.black,
 
-  text: paletteMaster.black,
-  textBG: paletteMaster.white,
+  text: palette.black,
+  textBG: palette.white,
 };
 
 export const dimensions = {
