@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation';
 
 import store from '../data/store';
 
+import { getAdverts } from '../actions/getAdverts';
 import { getSettings } from '../actions/getSettings';
 
 import Header from '../components/Header';
@@ -21,7 +22,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { settings } = this.props;
+    const { adverts, settings } = this.props;
 
     const renderGridItem = (page, id, index) => {
       const routeName = (page.appScreen) ? page.appScreen : 'Page';
@@ -40,7 +41,9 @@ class HomeScreen extends React.Component {
       );
     };
 
-    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1]) {
+    console.log('adverts', adverts);
+
+    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1] || !adverts || !adevrts.data) {
       return (
         <Loading />
       );
@@ -69,10 +72,12 @@ class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  adverts: state.adverts,
   settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
+  onGetAdverts: () => dispatch(getAdverts()),
   onGetSettings: () => dispatch(getSettings()),
   navigateTo: (routeName, id) => {
     const options = {

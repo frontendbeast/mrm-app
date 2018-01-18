@@ -1,6 +1,7 @@
 import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 
+import { getAdverts } from './getAdverts';
 import { getBrotherClubs } from './getBrotherClubs';
 import { getEvents } from './getEvents';
 import { getPages } from './getPages';
@@ -16,6 +17,10 @@ export function sync() {
       .sync()
       .then(results => {
         dispatch(syncFulfilledAction());
+
+        if (results.includes('advert')) {
+          dispatch(getAdverts());
+        }
 
         if (results.includes('brotherClub')) {
           dispatch(getBrotherClubs());

@@ -1,4 +1,8 @@
 const actionTypes = {
+  GetAdvertsRequested: 'GET_ADVERTS_REQUESTED',
+  GetAdvertsRejected: 'GET_ADVERTS_REJECTED',
+  GetAdvertsFulfilled: 'GET_ADVERTS_FULFILLED',
+
   GetBrotherClubsRequested: 'GET_BROTHER_CLUBS_REQUESTED',
   GetBrotherClubsRejected: 'GET_BROTHER_CLUBS_REJECTED',
   GetBrotherClubsFulfilled: 'GET_BROTHER_CLUBS_FULFILLED',
