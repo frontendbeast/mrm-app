@@ -5,6 +5,7 @@ import TeamListing from '../components/TeamListing';
 
 function mapStateToProps(state) {
   return {
+    assets: state.assets,
     persons: state.persons,
   };
 }

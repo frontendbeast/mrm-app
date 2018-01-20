@@ -1,24 +1,26 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
 import sharedStyles from '../styles/shared';
 
-export default class TeamDetail extends React.Component {
+class TeamDetail extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { persons, id } = this.props;
+    const { assets, persons, id } = this.props;
 
-    if ((persons.loading === undefined || persons.loading) && !persons.data) {
+    if (!assets || !assets.data || !persons || !persons.data) {
       return <Loading />;
     }
 
-    const person = persons.data[id];
+    const photo = assets.data[persons.data[id].photo];
+    const person = Object.assign({}, persons.data[id], { photo });
 
     return (
       <View>
@@ -33,3 +35,12 @@ export default class TeamDetail extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  assets: state.assets,
+  persons: state.persons
+});
+
+const mapDispatchToProps = dispatch => ({  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamDetail);

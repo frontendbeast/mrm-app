@@ -5,8 +5,8 @@ export function getSettings() {
   return dispatch => {
     dispatch(getSettingsRequestedAction());
 
-    return Promise
-      .all([cache.getByType('settings'), cache.getByType('page')])
+    return cache
+      .getByType('settings')
       .then(results => {
         dispatch(getSettingsFulfilledAction(results));
       })

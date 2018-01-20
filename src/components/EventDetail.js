@@ -1,23 +1,25 @@
 import React from 'react';
 import { Dimensions, Image, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import Moment from 'moment';
 
 import sharedStyles from '../styles/shared';
 
-export default class EventDetail extends React.Component {
+class EventDetail extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { events, id } = this.props;
+    const { assets, events, id, venues } = this.props;
 
-    if ((events.loading === undefined || events.loading) && !events.data) {
+    if (!assets || !assets.data || !events || !events.data) {
       return null;
     }
 
-    const event = events.data[id];
+    const venue = venues.data[events.data[id].venue];
+    const event = Object.assign({}, events.data[id], { venue: venue });
 
     return (
       <View>
@@ -35,3 +37,16 @@ export default class EventDetail extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  assets: state.assets,
+  events: state.events,
+  venues: state.venues
+ });
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDetail);
+

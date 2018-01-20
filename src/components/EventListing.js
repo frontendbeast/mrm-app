@@ -17,18 +17,24 @@ class EventListing extends React.Component {
 
   componentWillMount() {
     this.props.onGetEvents();
+    this.props.onGetVenues();
   }
 
   render() {
-    const { events } = this.props;
+    const { assets, events, venues } = this.props;
 
-    if ((events.loading === undefined || events.loading) && !events.data) {
+    if (!assets || !assets.data || !events || !events.data || !venues || !venues.data) {
       return <Loading />;
     }
 
     const items = Object
       .entries(events.data)
-      .map(([id, event]) => { return { ...event, id: id }; })
+      .map(([id, event]) => {
+        const venue = venues.data[event.venue];
+        const data = Object.assign({}, event, { id, venue });
+
+        return data;
+      })
       .sort((a, b) => { return Date.parse(a.date) - Date.parse(b.date); });
 
     const days = {};
@@ -71,7 +77,11 @@ class EventListing extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({  });
+const mapStateToProps = state => ({
+  assets: state.assets,
+  events: state.events,
+  venues: state.venues
+ });
 
 const mapDispatchToProps = dispatch => ({
   viewDetail: (id) =>
@@ -79,4 +89,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventListing);
-

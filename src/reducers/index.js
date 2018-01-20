@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import advertsReducer from './advertsReducer';
+import assetsReducer from './assetsReducer';
 import brotherClubsReducer from './brotherClubsReducer';
 import eventsReducer from './eventsReducer';
 import navReducer from './navReducer';
@@ -10,6 +12,8 @@ import settingsReducer from './settingsReducer';
 import venuesReducer from './venuesReducer';
 
 const reducers = combineReducers({
+  adverts: advertsReducer,
+  assets: assetsReducer,
   brotherClubs: brotherClubsReducer,
   events: eventsReducer,
   nav: navReducer,

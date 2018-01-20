@@ -4,6 +4,7 @@ import TeamDetail from '../components/TeamDetail';
 
 function mapStateToProps(state) {
   return {
+    assets: state.assets,
     persons: state.persons,
   };
 }

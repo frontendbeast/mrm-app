@@ -3,6 +3,10 @@ const actionTypes = {
   GetAdvertsRejected: 'GET_ADVERTS_REJECTED',
   GetAdvertsFulfilled: 'GET_ADVERTS_FULFILLED',
 
+  GetAssetsRequested: 'GET_ASSETS_REQUESTED',
+  GetAssetsRejected: 'GET_ASSETS_REJECTED',
+  GetAssetsFulfilled: 'GET_ASSETS_FULFILLED',
+
   GetBrotherClubsRequested: 'GET_BROTHER_CLUBS_REQUESTED',
   GetBrotherClubsRejected: 'GET_BROTHER_CLUBS_REJECTED',
   GetBrotherClubsFulfilled: 'GET_BROTHER_CLUBS_FULFILLED',

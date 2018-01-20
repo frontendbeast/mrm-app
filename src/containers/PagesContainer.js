@@ -5,14 +5,13 @@ import Page from '../components/Page';
 
 function mapStateToProps(state) {
   return {
+    assets: state.assets,
     pages: state.pages,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    onGetPages: () => dispatch(getPages()),
-  };
+  return {};
 }
 
 const PagesContainer = connect(mapStateToProps, mapDispatchToProps)(Page);

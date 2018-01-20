@@ -19,15 +19,24 @@ class TeamListing extends React.Component {
   }
 
   render() {
-    const { persons } = this.props;
+    const { assets, persons } = this.props;
 
-    if ((persons.loading === undefined || persons.loading) && !persons.data) {
+    if (!assets || !assets.data || !persons || !persons.data) {
       return <Loading />;
     }
 
     const items = Object
       .entries(persons.data)
-      .map(([id, person]) => { return { ...person, id: id }; })
+      .map(([id, person]) => {
+        const data = {
+          ...person,
+          id: id
+        };
+
+        data.photo = assets.data[person.photo];
+
+        return data;
+      })
       .sort((a, b) => { return Date.parse(b.name) - Date.parse(a.name); });
 
     return (
@@ -55,7 +64,10 @@ class TeamListing extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({  });
+const mapStateToProps = state => ({
+  assets: state.assets,
+  persons: state.persons
+});
 
 const mapDispatchToProps = dispatch => ({
   viewDetail: (id) =>

@@ -40,10 +40,6 @@ export default class Page extends React.Component {
     this.scrollView;
   }
 
-  componentWillMount() {
-    this.props.onGetPages();
-  }
-
   componentDidUpdate() {
     if(this.scrollView) {
       this.scrollView.scrollTo({x: 0, y: 0, animated: false});
@@ -51,40 +47,45 @@ export default class Page extends React.Component {
   }
 
   render() {
-    const { pages, id, title } = this.props;
+    const { assets, pages, id, title } = this.props;
 
-    if ((pages.loading === undefined || pages.loading) && !pages.data) {
+    if (!pages || !pages.data || !assets || !assets.data) {
       return (
         <Loading />
       );
     }
 
-    const page = pages.data[id];
+    const data = pages.data[id];
+    const image = assets.data[data.image];
+    const page = Object.assign({}, data, { image: image });
 
     return (
-      <ScrollView ref={ScrollView => this.scrollView = ScrollView}>
-        <View key={id} style={componentStyles['page-content']}>
-        {page.image ?
-          <View>
-            <View style={componentStyles['page-masthead__container']}>
-              <View style={componentStyles['page-masthead__centered']}>
-                <Text style={componentStyles['page-masthead__text']}>{page.title.toUpperCase()}</Text>
+      <View style={{flex: 1}}>
+        <View style={{ backgroundColor: '#fff', position: 'absolute', width: '100%', height: '50%', bottom: 0 }}></View>
+        <ScrollView ref={ScrollView => this.scrollView = ScrollView}>
+          <View key={id} style={[componentStyles['page-content']]}>
+          {page.image ?
+            <View>
+              <View style={componentStyles['page-masthead__container']}>
+                <View style={componentStyles['page-masthead__centered']}>
+                  <Text style={componentStyles['page-masthead__text']}>{page.title.toUpperCase()}</Text>
+                </View>
               </View>
+              <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />
             </View>
-            <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />
+          : null}
+            <View style={sharedStyles['container']}>
+              {page.intro ?
+                <View key={'blockQuote'} style={[markdownStyles.blockquote, markdownStyles.blockquoteAlt, componentStyles['page-masthead__blockquote']]}>
+                  <Image source={require('../assets/images/quote-alt.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
+                  <Text style={[markdownStyles.blockquoteText, markdownStyles.blockquoteTextAlt]}>{page.intro}</Text>
+                </View>
+              : null}
+              <Markdown style={markdownStyles} rules={rules}>{page.copy}</Markdown>
+            </View>
           </View>
-        : null}
-          <View style={sharedStyles.container}>
-            {page.intro ?
-              <View key={'blockQuote'} style={[markdownStyles.blockquote, markdownStyles.blockquoteAlt, componentStyles['page-masthead__blockquote']]}>
-                <Image source={require('../assets/images/quote-alt.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
-                <Text style={[markdownStyles.blockquoteText, markdownStyles.blockquoteTextAlt]}>{page.intro}</Text>
-              </View>
-            : null}
-            <Markdown style={markdownStyles} rules={rules}>{page.copy}</Markdown>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }

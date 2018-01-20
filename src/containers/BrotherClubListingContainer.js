@@ -5,6 +5,7 @@ import BrotherClubListing from '../components/BrotherClubListing';
 
 function mapStateToProps(state) {
   return {
+    assets: state.assets,
     brotherClubs: state.brotherClubs,
   };
 }

@@ -3,6 +3,8 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
 
+import { getAssets } from '../actions/getAssets';
+import { getPages } from '../actions/getPages';
 import { getSettings } from '../actions/getSettings';
 import { sync } from '../actions/sync';
 
@@ -11,19 +13,20 @@ import componentStyles from '../styles/menu';
 
 class Menu extends React.Component {
   componentDidMount() {
+    this.props.onGetAssets();
+    this.props.onGetPages();
     this.props.onGetSettings();
     this.props.onSync();
   }
 
   render () {
-    const { settings } = this.props;
+    const { pages, settings } = this.props;
 
-    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1]) {
+    if(!pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return null;
     }
 
-    const menu = settings.data[0][Object.keys(settings.data[0])[0]].menu;
-    const pageList = settings.data[1];
+    const menu = settings.data[Object.keys(settings.data)[0]].menu;
 
     const renderLink = (routeName, title, id) => {
       const key = (id) ? id : Math.floor(Math.random() * (100000 + 1));
@@ -42,10 +45,10 @@ class Menu extends React.Component {
         {menu.map((item, index) => {
           const items = [];
 
-          const page = pageList[item.sys.id];
+          const page = pages.data[item];
           const routeName = (page.appScreen) ? page.appScreen : 'Page';
 
-          items.push(renderLink(routeName, page.title, item.sys.id));
+          items.push(renderLink(routeName, page.title, item));
 
           return items;
         })}
@@ -55,10 +58,14 @@ class Menu extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  assets: state.assets,
+  pages: state.pages,
   settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
+  onGetAssets: () => dispatch(getAssets()),
+  onGetPages: () => dispatch(getPages()),
   onGetSettings: () => dispatch(getSettings()),
   onSync: () => dispatch(sync()),
   navigateTo: (routeName, id) => {

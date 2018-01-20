@@ -43,6 +43,16 @@ const cache = {
       database
         .sync(options)
         .then(async results => {
+          // Process assets
+          results.assets.forEach(asset => {
+            // Keep track of content types to update indexes
+            if(!types.includes('asset')) {
+              types.push('asset');
+            }
+
+            // Format data
+            update[asset.sys.id] = _processItem(asset, 'asset');
+          });
 
           // Process entries
           results.entries.forEach(entry => {
@@ -54,10 +64,15 @@ const cache = {
             }
 
             // Format data
-            update[entry.sys.id] = _processEntry(entry);
+            update[entry.sys.id] = _processItem(entry, type);
           });
 
           const removal = [];
+
+          // Create an array of assets being removed
+          results.deletedAssets.forEach(async asset => {
+            removal.push(asset.sys.id);
+          });
 
           // Create an array of entries being removed
           results.deletedEntries.forEach(async entry => {
@@ -152,29 +167,32 @@ async function _setItems(array) {
   return await AsyncStorage.multiSet(array);
 }
 
-function _processEntry(entry) {
-  const item = {
-    type: entry.sys.contentType.sys.id
+function _processItem(item, type) {
+  const data = {
+    type: type
   };
 
   // Remove sys and localisation
-  Object.entries(entry.fields).forEach(([key, value]) => {
-    item[key] = value['en-GB'];
+  Object.entries(item.fields).forEach(([key, value]) => {
+    const content = value['en-GB'];
+    // If linked entry, store ID else value
+    data[key] = (content.sys) ? content.sys.id : content;
 
-    // If linked entry e.g. asset or venue
-    if (item[key].sys) {
-      const include = {};
-
-      // Remove sys and localisation
-      Object.entries(item[key].fields).forEach(([objectKey, object]) => {
-        include[objectKey] = object['en-GB'];
+    if (content.sys) {
+      data[key] = content.sys.id;
+    } else if (Array.isArray(content)) {
+      data[key] = [];
+      content.map(listItem => {
+        if (listItem.sys) {
+          data[key].push(listItem.sys.id);
+        }
       });
-
-      item[key] = include;
+    } else {
+      data[key] = content;
     }
   });
 
-  return item;
+  return data;
 }
 
 export default cache;

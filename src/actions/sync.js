@@ -2,6 +2,7 @@ import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 
 import { getAdverts } from './getAdverts';
+import { getAssets } from './getAssets';
 import { getBrotherClubs } from './getBrotherClubs';
 import { getEvents } from './getEvents';
 import { getPages } from './getPages';
@@ -20,6 +21,10 @@ export function sync() {
 
         if (results.includes('advert')) {
           dispatch(getAdverts());
+        }
+
+        if (results.includes('asset')) {
+          dispatch(getAssets());
         }
 
         if (results.includes('brotherClub')) {
@@ -43,7 +48,7 @@ export function sync() {
         }
 
         if (results.includes('venue')) {
-          dispatch(getSettings());
+          dispatch(getVenues());
         }
 
       })

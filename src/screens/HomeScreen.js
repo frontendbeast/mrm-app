@@ -3,9 +3,6 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import { getAdverts } from '../actions/getAdverts';
-import { getSettings } from '../actions/getSettings';
-
 import Header from '../components/Header';
 import ImageLoader from '../components/ImageLoader';
 import Loading from '../components/Loading';
@@ -20,7 +17,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { adverts, settings } = this.props;
+    const { assets, pages, settings } = this.props;
 
     const renderGridItem = (page, id, index) => {
       const routeName = (page.appScreen) ? page.appScreen : 'Page';
@@ -39,26 +36,25 @@ class HomeScreen extends React.Component {
       );
     };
 
-    if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1] || !adverts || !adevrts.data) {
+    if(!assets || !assets.data || !pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return (
         <Loading />
       );
     }
 
-    const homeGrid = settings.data[0][Object.keys(settings.data[0])[0]].homeGrid;
-    const pageList = settings.data[1];
+    const homeGrid = settings.data[Object.keys(settings.data)[0]].homeGrid;
 
     return (
       <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header/>
         <ScrollView>
           <View style={screenStyles['home-grid']}>
-          {homeGrid.map((item, index) => {
-            const items = [];
+          {homeGrid.map((pageID, index) => {
+            const page = pages.data[pageID];
+            const image = assets.data[page.image];
+            const data = Object.assign({}, page, { image: image });
 
-            items.push(renderGridItem(pageList[item.sys.id], item.sys.id, index));
-
-            return items;
+            return renderGridItem(data, pageID, index);
           })}
           </View>
         </ScrollView>
@@ -68,13 +64,12 @@ class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  adverts: state.adverts,
+  assets: state.assets,
+  pages: state.pages,
   settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onGetAdverts: () => dispatch(getAdverts()),
-  onGetSettings: () => dispatch(getSettings()),
   navigateTo: (routeName, id) => {
     const options = {
       routeName: routeName,
