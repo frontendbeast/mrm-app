@@ -15,7 +15,7 @@ export default class EventListingScreen extends React.Component {
     return (
       <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView contentContainerStyle={sharedStyles['fullsize']}>
+        <ScrollView>
           <EventListingContainer/>
         </ScrollView>
       </View>

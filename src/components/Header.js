@@ -7,22 +7,20 @@ import componentStyles from '../styles/header';
 
 const Header = ({ openDrawer, dismiss, title, back }) => (
 
-  <SafeAreaView style={{backgroundColor: '#000'}}>
-    <View style={componentStyles['header']}>
-      <View style={componentStyles['header__container']}>
-      {back ?
-        <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
-          <Text>Back</Text>
-        </TouchableOpacity> :
-        <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
-          <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
-        </TouchableOpacity>
-      }
-      <View style={{}}>
-        <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
-      </View>
-      <View style={componentStyles.header__spacer} />
-      </View>
+  <SafeAreaView style={componentStyles['header']}>
+    <View style={componentStyles['header__container']}>
+    {back ?
+      <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
+        <Text>Back</Text>
+      </TouchableOpacity> :
+      <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
+        <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
+      </TouchableOpacity>
+    }
+    <View style={{}}>
+      <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
+    </View>
+    <View style={componentStyles.header__spacer} />
     </View>
   </SafeAreaView>
 );

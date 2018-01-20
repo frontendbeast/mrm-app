@@ -1,10 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import PullToRefresh from 'react-native-simple-ptr';
-
-import store from '../data/store';
-
-import { getPages } from '../actions/getPages';
 
 import Header from '../components/Header';
 import PagesContainer from '../containers/PagesContainer';

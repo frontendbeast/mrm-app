@@ -3,8 +3,6 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import store from '../data/store';
-
 import { getAdverts } from '../actions/getAdverts';
 import { getSettings } from '../actions/getSettings';
 
@@ -40,8 +38,6 @@ class HomeScreen extends React.Component {
         </TouchableOpacity>
       );
     };
-
-    console.log('adverts', adverts);
 
     if(!settings || !settings.data || !settings.data[0] || !Object.keys(settings.data[0]).length || !settings.data[1] || !adverts || !adevrts.data) {
       return (

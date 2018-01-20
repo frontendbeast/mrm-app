@@ -43,7 +43,6 @@ const cache = {
       database
         .sync(options)
         .then(async results => {
-          // console.log(results);
 
           // Process entries
           results.entries.forEach(entry => {

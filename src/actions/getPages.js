@@ -1,7 +1,7 @@
 import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 
-export function getPages(id) {
+export function getPages() {
   return dispatch => {
     dispatch(getPagesRequestedAction());
 

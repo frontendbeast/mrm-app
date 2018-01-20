@@ -8,7 +8,6 @@ export function getAdverts() {
     return cache
       .getByType('advert')
       .then(results => {
-        console.log('ad success', results);
         dispatch(getAdvertsFulfilledAction(results));
       })
       .catch(error => {
