@@ -89,7 +89,7 @@ export default class ImageLoader extends React.Component {
     const AnimatedCachedImage = Animated.createAnimatedComponent(CachedImage);
 
     return (
-      <View style={[{ backgroundColor: backgroundColor, paddingTop: `${(height/width)*100}%`, position: 'relative'}, style]}>
+      <View style={[{ backgroundColor: backgroundColor, aspectRatio: width/height, position: 'relative'}, style]}>
         <AnimatedCachedImage style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} onLoad={this.onLoadThumb} blurRadius={1}/>
         <AnimatedCachedImage style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>

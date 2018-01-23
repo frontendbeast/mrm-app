@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
 
+import { getAdverts } from '../actions/getAdverts';
 import { getAssets } from '../actions/getAssets';
 import { getPages } from '../actions/getPages';
 import { getSettings } from '../actions/getSettings';
@@ -13,6 +14,7 @@ import componentStyles from '../styles/menu';
 
 class Menu extends React.Component {
   componentDidMount() {
+    this.props.onGetAdverts();
     this.props.onGetAssets();
     this.props.onGetPages();
     this.props.onGetSettings();
@@ -58,12 +60,14 @@ class Menu extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  adverts: state.adverts,
   assets: state.assets,
   pages: state.pages,
   settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
+  onGetAdverts: () => dispatch(getAdverts()),
   onGetAssets: () => dispatch(getAssets()),
   onGetPages: () => dispatch(getPages()),
   onGetSettings: () => dispatch(getSettings()),

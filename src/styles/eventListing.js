@@ -6,27 +6,46 @@ import  { colors, dimensions } from './variables';
 export default StyleSheet.create({
 
   'day': {
-    backgroundColor: colors.listItemHeader,
+    backgroundColor: colors.eventListingGroupBG,
     padding: dimensions.gutter,
   },
+
   'day__name': {
-    color: colors.listItemHeaderText,
-    fontWeight: 'bold',
+    color: colors.eventListingGroupText,
+    fontFamily: 'BebasNeue',
+    fontSize: 18,
+    letterSpacing: 0.5,
   },
+
   'event': {
-    borderBottomColor: colors.listItemBorder,
-    borderBottomWidth: 0.5,
+    aspectRatio: 2.5,
+    backgroundColor: colors.eventBG,
   },
-  'event--last': {
-    borderBottomWidth: 0,
-  },
+
   'event__link': {
-    borderBottomWidth: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: dimensions.gutter,
+    position: 'relative',
   },
+
   'event__name': {
-    color: colors.listItemText,
+    color: colors.text,
     fontWeight: 'bold',
+  },
+
+  'event__separator': {
+    backgroundColor: colors.eventBorder,
+    bottom: 0,
+    height: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+  },
+
+  'event__text': {
+    alignSelf: 'flex-end',
   }
 
 });

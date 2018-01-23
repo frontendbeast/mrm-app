@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 
 import Loading from './Loading';
+import ImageLoader from './ImageLoader';
 
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/eventListing';
@@ -31,7 +32,8 @@ class EventListing extends React.Component {
       .entries(events.data)
       .map(([id, event]) => {
         const venue = venues.data[event.venue];
-        const data = Object.assign({}, event, { id, venue });
+        const imageListing = assets.data[event.imageListing];
+        const data = Object.assign({}, event, { id, venue, imageListing });
 
         return data;
       })
@@ -46,8 +48,7 @@ class EventListing extends React.Component {
     });
 
     return (
-      <View style={sharedStyles['fullsize']}>
-
+      <View style={[sharedStyles['fullsize']]}>
         {Object.entries(days).map(([day, listings]) => {
           return (
             <View key={day}>
@@ -62,8 +63,13 @@ class EventListing extends React.Component {
                     onPress={() => { this.props.viewDetail(event.id); }}
                   >
                     <View style={componentStyles['event__link']}>
-                      <Text style={componentStyles['event__name']}>{ event.name }</Text>
-                      <Text>{ Moment(event.date).format('ha') } @ { event.venue.name }</Text>
+                      {event.imageListing ?
+                      <ImageLoader source={`https:${event.imageListing.file.url}`} height={event.imageListing.file.details.image.height} width={event.imageListing.file.details.image.height} imgSize={900} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
+                      : <View style={componentStyles['event__separator']} /> }
+                      <View style={componentStyles['event__text']}>
+                        <Text style={sharedStyles['tape--md']}>{ event.name }</Text>
+                        <Text style={sharedStyles['tape--sm']}>{ Moment(event.date).format('h:m') } @ { event.venue.name }</Text>
+                      </View>
                     </View>
                   </TouchableOpacity>
                 );

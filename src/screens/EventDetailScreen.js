@@ -13,7 +13,7 @@ export default class EventDetailScreen extends React.Component {
 
   render() {
     return (
-      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
+      <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header back={true}/>
         <ScrollView>
           <EventDetailContainer id={this.props.navigation.state.params.id} />

@@ -13,7 +13,7 @@ export default class EventListingScreen extends React.Component {
 
   render() {
     return (
-      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
+      <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header/>
         <ScrollView>
           <EventListingContainer/>

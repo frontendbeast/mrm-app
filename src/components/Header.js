@@ -11,13 +11,13 @@ const Header = ({ openDrawer, dismiss, title, back }) => (
     <View style={componentStyles['header__container']}>
     {back ?
       <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
-        <Text>Back</Text>
+        <Image source={require('../assets/images/back-btn.png')} resizeMode="contain" />
       </TouchableOpacity> :
       <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
         <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
       </TouchableOpacity>
     }
-    <View style={{}}>
+    <View>
       <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
     </View>
     <View style={componentStyles.header__spacer} />

@@ -6,27 +6,29 @@ import  { colors, dimensions } from './variables';
 export default StyleSheet.create({
 
   'header': {
-    backgroundColor: '#000',
+    backgroundColor: colors.header,
   },
+
   'header__container': {
     backgroundColor: colors.header,
     flexDirection: 'row',
   },
+
   'header__logo':{
-    marginTop:  dimensions.gutter - 1,
-    width: 150,
+    alignSelf: 'center',
+    flex: 1,
+    height: 60,
   },
+
   'header__nav-button': {
     alignSelf: 'flex-start',
     flex: 1,
-    padding: dimensions.gutter,
-    width: 30,
+    height: 60,
   },
+
   'header__spacer': {
     alignSelf: 'flex-end',
     flex: 1,
-    padding: dimensions.gutter,
-    width: 30,
   }
 
 });

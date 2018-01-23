@@ -61,7 +61,6 @@ export default class Page extends React.Component {
 
     return (
       <View style={{flex: 1}}>
-        <View style={{ backgroundColor: '#fff', position: 'absolute', width: '100%', height: '50%', bottom: 0 }}></View>
         <ScrollView ref={ScrollView => this.scrollView = ScrollView}>
           <View key={id} style={[componentStyles['page-content']]}>
           {page.image ?

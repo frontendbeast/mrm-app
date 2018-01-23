@@ -1,6 +1,8 @@
 const palette = {
-  black: '#222',
-  grey: '#ccc',
+  black: '#000',
+  grey: '#222',
+  greyMedium: '#333',
+  greyLight: '#ccc',
   red: '#b81a1b',
   white: '#fff',
   yellow: '#fd0',
@@ -9,20 +11,24 @@ const palette = {
 export const colors = {
   appBG: palette.black,
 
+  eventBG: palette.greyMedium,
+  eventBorder: palette.grey,
+  eventListingGroupBG: palette.grey,
+  eventListingGroupText: palette.white,
+  eventListingBorder: palette.greyLight,
+
   header: palette.black,
 
-  homeGridTextBG: palette.white,
-  homeGridText: palette.black,
-  homeGridTextFeatureBG: palette.yellow,
-  homeGridTextFeature: palette.black,
+  tapeBG: palette.white,
+  tapeText: palette.black,
+  tapeInverseBG: palette.black,
+  tapeInverseText: palette.white,
+  tapeFeatureBG: palette.yellow,
+  tapeFeatureText: palette.black,
+  tapeHighlightBG: palette.red,
+  tapeHighlightText: palette.white,
 
-  listItemHeader: palette.black,
-  listItemHeaderText: palette.yellow,
-  listItemBorder: palette.grey,
-  listItemText: palette.black,
-
-  text: palette.black,
-  textBG: palette.white,
+  text: palette.white,
 };
 
 export const dimensions = {

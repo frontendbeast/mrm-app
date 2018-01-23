@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import PagesContainer from '../containers/PagesContainer';
 
 import sharedStyles from '../styles/shared';
+import advertStyles from '../styles/advert';
 import screenStyles from '../styles/homeScreen';
 
 class HomeScreen extends React.Component {
@@ -17,20 +18,34 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { assets, pages, settings } = this.props;
+    const { adverts, assets, pages, settings } = this.props;
+
+    const renderAdvert = (id) => {
+      const assetID = adverts.data[id].image;
+      const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
+      const aspectRatio = advert.image.file.details.image.width/advert.image.file.details.image.height;
+      return (
+        <TouchableOpacity key={id} onPress={() => { Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
+          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
+        </TouchableOpacity>
+      );
+    };
 
     const renderGridItem = (page, id, index) => {
       const routeName = (page.appScreen) ? page.appScreen : 'Page';
       const width = (index === 0) ? '100%' : '50%';
 
-      classGridItem = (index === 0) ? screenStyles['home-grid__item--feature'] : screenStyles['home-grid__item'];
-      classGridText = (index === 0) ? screenStyles['home-grid__text--feature'] : screenStyles['home-grid__text'];
+      const classGridItem = (index === 0) ? screenStyles['home-grid__item--feature'] : screenStyles['home-grid__item'];
+      const classGridText = (index === 0) ? sharedStyles['tape--lg'] : sharedStyles['tape--md'];
+
+      const imgOpacity = (index === 0) ? 1 : 0.7;
+      const imgSize = (index === 0) ? 900 : 450;
 
       return (
         <TouchableOpacity key={id} onPress={() => { this.props.navigateTo(routeName, id); }} style={classGridItem}>
-          <ImageLoader source={`https:${page.image.file.url}`} height={300} width={400} imgSize={325} style={sharedStyles['absolute-cover']} resizeMode='cover' />
+          <ImageLoader source={`https:${page.image.file.url}`} height={page.image.file.details.image.height} width={page.image.file.details.image.height} imgSize={imgSize} style={[sharedStyles['absolute-cover'], {opacity: imgOpacity}]} resizeMode='cover' />
           <View>
-            <Text style={classGridText}>{page.title.toUpperCase()}</Text>
+            <Text style={classGridText}>{page.title}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -54,7 +69,17 @@ class HomeScreen extends React.Component {
             const image = assets.data[page.image];
             const data = Object.assign({}, page, { image: image });
 
-            return renderGridItem(data, pageID, index);
+            const items = [renderGridItem(data, pageID, index)];
+
+            if (index === 0) {
+              items.push(renderAdvert('1SblMH5T4MkCO4E0Gckg4w'));
+            } else if (index === 2) {
+              items.push(renderAdvert('3h6zuGqSROqEyw2IyCegOo'));
+            } else if ( index === homeGrid.length-1 ) {
+              items.push(renderAdvert('GgXZ1SbXEWiMSK2gC2Wuk'));
+            }
+
+            return items;
           })}
           </View>
         </ScrollView>
@@ -64,6 +89,7 @@ class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  adverts: state.adverts,
   assets: state.assets,
   pages: state.pages,
   settings: state.settings,
