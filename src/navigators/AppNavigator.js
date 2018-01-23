@@ -33,8 +33,6 @@ class AppWithNavigationState extends React.Component {
   onBackPress = () => {
     const { dispatch, nav } = this.props;
 
-    console.log('APP NAV', nav);
-
     if (nav.index === 1) {
       dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
       return true;
