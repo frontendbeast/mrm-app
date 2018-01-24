@@ -19,8 +19,7 @@ const markdownStyles = StyleSheet.create({
     zIndex: 1,
   },
   blockquoteText: {
-    backgroundColor: colors.textBG,
-    color: colors.text,
+    color: colors.blockQuoteText,
     fontFamily: 'ZillaSlab-Italic',
     fontSize: 24,
     lineHeight: 34,
@@ -30,8 +29,8 @@ const markdownStyles = StyleSheet.create({
     paddingTop: 20,
   },
   blockquoteTextAlt: {
-    backgroundColor: colors.text,
-    color: colors.textBG,
+    backgroundColor: colors.blockQuoteAltBG,
+    color: colors.blockQuoteAltText,
   },
   em: {
     fontFamily: 'ZillaSlab-Italic',

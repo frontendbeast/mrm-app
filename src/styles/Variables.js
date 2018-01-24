@@ -11,6 +11,10 @@ const palette = {
 export const colors = {
   appBG: palette.black,
 
+  blockQuoteText: palette.greyLight,
+  blockQuoteAltBG: palette.greyMedium,
+  blockQuoteAltText: palette.white,
+
   eventBG: palette.greyMedium,
   eventBorder: palette.grey,
   eventListingGroupBG: palette.grey,
