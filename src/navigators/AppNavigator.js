@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, DrawerNavigator, NavigationActions } from 'react-navigation';
 
@@ -13,6 +13,8 @@ import HomeScreen from '../screens/HomeScreen';
 import PageScreen from '../screens/PageScreen';
 import TeamScreen from '../screens/TeamScreen';
 
+import  { colors } from '../styles/variables';
+
 export const AppNavigator = DrawerNavigator({
   'Brother Clubs': { screen: BrotherClubListingScreen },
   'Events': { screen: EventsScreen },
@@ -21,6 +23,8 @@ export const AppNavigator = DrawerNavigator({
   'Team': { screen: TeamScreen },
 },{
   contentComponent: Menu,
+  drawerBackgroundColor: 'transparent',
+  drawerWidth: Dimensions.get('screen').width,
   initialRouteName: 'Home',
 });
 

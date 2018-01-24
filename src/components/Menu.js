@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
 
@@ -8,6 +8,8 @@ import { getAssets } from '../actions/getAssets';
 import { getPages } from '../actions/getPages';
 import { getSettings } from '../actions/getSettings';
 import { sync } from '../actions/sync';
+
+import Header from '../components/Header';
 
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/menu';
@@ -22,7 +24,7 @@ class Menu extends React.Component {
   }
 
   render () {
-    const { pages, settings } = this.props;
+    const { closeDrawer, pages, settings } = this.props;
 
     if(!pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return null;
@@ -35,15 +37,17 @@ class Menu extends React.Component {
 
       return (
         <TouchableOpacity key={key} onPress={() => { this.props.navigateTo(routeName, id); }}>
-          <View style={componentStyles['menu__link']}>
-            <Text>{title}</Text>
-          </View>
+          <Text style={[sharedStyles['tape--md'], {marginTop: 16, alignSelf: 'center'}]}>{title}</Text>
         </TouchableOpacity>
       );
     };
 
     return (
       <SafeAreaView style={sharedStyles['fullsize']}>
+        <TouchableOpacity style={componentStyles['header__nav-button']} onPress={closeDrawer}>
+          <Image source={require('../assets/images/close-btn.png')} resizeMode="contain" style={sharedStyles['app']} />
+        </TouchableOpacity>
+        <View style={sharedStyles['fullsize']}>
         {menu.map((item, index) => {
           const items = [];
 
@@ -54,6 +58,7 @@ class Menu extends React.Component {
 
           return items;
         })}
+        </View>
       </SafeAreaView>
     );
   }
@@ -83,6 +88,8 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(NavigationActions.navigate(options));
   },
+  closeDrawer: () =>
+    dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
