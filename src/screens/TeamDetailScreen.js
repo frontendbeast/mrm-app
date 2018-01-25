@@ -13,7 +13,7 @@ export default class TeamDetailScreen extends React.Component {
 
   render() {
     return (
-      <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
+      <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header back={true}/>
         <ScrollView>
           <TeamDetailContainer id={this.props.navigation.state.params.id} />

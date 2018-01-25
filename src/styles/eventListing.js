@@ -23,6 +23,7 @@ export default StyleSheet.create({
   },
 
   'event__link': {
+    alignItems: 'flex-end',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -43,9 +44,5 @@ export default StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
-
-  'event__text': {
-    alignSelf: 'flex-end',
-  }
 
 });

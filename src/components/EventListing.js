@@ -59,7 +59,7 @@ class EventListing extends React.Component {
                 return (
                   <TouchableOpacity
                     key={event.id}
-                    style={[componentStyles['event'], index === listings.length - 1 && componentStyles['event--last']]}
+                    style={componentStyles['event']}
                     onPress={() => { this.props.viewDetail(event.id); }}
                   >
                     <View style={componentStyles['event__link']}>

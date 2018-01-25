@@ -11,16 +11,19 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     width: '100%',
   },
+
   'person': {
     aspectRatio: 1,
+    position: 'relative',
     width: '50%',
   },
+
   'person__link': {
-    borderBottomWidth: 0,
+    alignItems: 'flex-end',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: dimensions.gutter,
   },
-  'person__name': {
-    fontWeight: 'bold',
-  }
 
 });

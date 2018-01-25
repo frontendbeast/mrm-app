@@ -6,7 +6,7 @@ import  { colors } from './variables';
 export default StyleSheet.create({
 
   'loading': {
-    backgroundColor: colors.textBG,
+    backgroundColor: colors.appBG,
     flex: 1,
     justifyContent: 'center',
   },

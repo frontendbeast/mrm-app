@@ -28,14 +28,9 @@ class TeamListing extends React.Component {
     const items = Object
       .entries(persons.data)
       .map(([id, person]) => {
-        const data = {
-          ...person,
-          id: id
-        };
+        const photo = assets.data[person.photo];
 
-        data.photo = assets.data[person.photo];
-
-        return data;
+        return Object.assign({}, person, { id, photo });
       })
       .sort((a, b) => { return Date.parse(b.name) - Date.parse(a.name); });
 
@@ -46,14 +41,14 @@ class TeamListing extends React.Component {
             return (
               <TouchableOpacity
                 key={person.id}
-                style={[componentStyles['person'], index === items.length - 1 && componentStyles['person--last']]}
+                style={componentStyles['person']}
                 onPress={() => { this.props.viewDetail(person.id); }}
               >
-                <View style={componentStyles['person__photo']}>
-                  <ImageLoader source={`https:${person.photo.file.url}`} height={300} width={400} imgSize={325} />
-                </View>
+                <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={450} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
                 <View style={componentStyles['person__link']}>
-                  <Text style={componentStyles['person__name']}>{ person.name }</Text>
+                  <View style={componentStyles['person__text']}>
+                    <Text style={sharedStyles['tape--md']}>{ person.name }</Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             );
