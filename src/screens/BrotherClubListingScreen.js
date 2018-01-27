@@ -15,9 +15,7 @@ export default class BrotherClubListingScreen extends React.Component {
     return (
       <View style={[sharedStyles['content'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView>
-          <BrotherClubListingContainer/>
-        </ScrollView>
+        <BrotherClubListingContainer/>
       </View>
     );
   }

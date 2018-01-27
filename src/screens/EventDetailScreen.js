@@ -15,9 +15,7 @@ export default class EventDetailScreen extends React.Component {
     return (
       <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header back={true}/>
-        <ScrollView>
-          <EventDetailContainer id={this.props.navigation.state.params.id} />
-        </ScrollView>
+        <EventDetailContainer id={this.props.navigation.state.params.id} />
       </View>
     );
   }

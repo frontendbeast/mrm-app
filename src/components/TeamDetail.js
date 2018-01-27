@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 
@@ -50,18 +50,20 @@ class TeamDetail extends React.Component {
     const person = Object.assign({}, persons.data[id], { photo });
 
     return (
-      <View>
-        { person.photo ?
-          <View style={{ aspectRatio: 1 }}>
-            <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={900} style={sharedStyles['absoluteCover']} resizeMode='cover' />
-          </View>
-        : null }
-        <View style={sharedStyles['container']}>
-          <Text style={[sharedStyles['heading'], componentStyles['person__name']]}>{ person.name }</Text>
-          { person.biography ?
-          <Markdown style={markdownStyles} rules={rules}>{person.biography}</Markdown>
+      <View style={sharedStyles['fullsize']}>
+        <ScrollView>
+          { person.photo ?
+            <View style={{ aspectRatio: 1 }}>
+              <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={900} style={sharedStyles['absoluteCover']} resizeMode='cover' />
+            </View>
           : null }
-        </View>
+          <View style={sharedStyles['container']}>
+            <Text style={[sharedStyles['heading'], componentStyles['person__name']]}>{ person.name }</Text>
+            { person.biography ?
+            <Markdown style={markdownStyles} rules={rules}>{person.biography}</Markdown>
+            : null }
+          </View>
+        </ScrollView>
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 import Header from '../components/Header';
 import EventListingContainer from '../containers/EventListingContainer';
@@ -15,9 +15,7 @@ export default class EventListingScreen extends React.Component {
     return (
       <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView>
-          <EventListingContainer/>
-        </ScrollView>
+        <EventListingContainer />
       </View>
     );
   }

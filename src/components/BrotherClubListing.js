@@ -28,15 +28,17 @@ export default class BrotherClubListing extends React.Component {
 
     return (
       <View style={sharedStyles['fullsize']}>
-        <View>
-          {items.map((club, index) => {
-            return (
-              <View key={club.id}>
-                <Text>{ club.name }</Text>
-              </View>
-            );
-          })}
-        </View>
+        <ScrollView>
+          <View>
+            {items.map((club, index) => {
+              return (
+                <View key={club.id}>
+                  <Text>{ club.name }</Text>
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
       </View>
     );
   }

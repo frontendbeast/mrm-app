@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -49,35 +49,37 @@ class EventListing extends React.Component {
 
     return (
       <View style={[sharedStyles['fullsize']]}>
-        {Object.entries(days).map(([day, listings]) => {
-          return (
-            <View key={day}>
-              <View style={componentStyles['day']}>
-                <Text style={componentStyles['day__name']}>{ day }</Text>
-              </View>
-              {listings.map((event, index) => {
-                return (
-                  <TouchableOpacity
-                    key={event.id}
-                    style={componentStyles['event']}
-                    onPress={() => { this.props.viewDetail(event.id); }}
-                  >
-                    <View style={componentStyles['event__link']}>
-                      {event.imageListing ?
-                      <ImageLoader source={`https:${event.imageListing.file.url}`} height={event.imageListing.file.details.image.height} width={event.imageListing.file.details.image.height} imgSize={900} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
-                      : <View style={componentStyles['event__separator']} /> }
-                      <View style={componentStyles['event__text']}>
-                        <Text style={sharedStyles['tape--md']}>{ event.name }</Text>
-                        <Text style={sharedStyles['tape--sm']}>{ Moment(event.date).format('h:m') } @ { event.venue.name }</Text>
+        <ScrollView>
+          {Object.entries(days).map(([day, listings]) => {
+            return (
+              <View key={day}>
+                <View style={componentStyles['day']}>
+                  <Text style={componentStyles['day__name']}>{ day }</Text>
+                </View>
+                {listings.map((event, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={event.id}
+                      style={componentStyles['event']}
+                      onPress={() => { this.props.viewDetail(event.id); }}
+                    >
+                      <View style={componentStyles['event__link']}>
+                        {event.imageListing ?
+                        <ImageLoader source={`https:${event.imageListing.file.url}`} height={event.imageListing.file.details.image.height} width={event.imageListing.file.details.image.height} imgSize={900} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
+                        : <View style={componentStyles['event__separator']} /> }
+                        <View style={componentStyles['event__text']}>
+                          <Text style={sharedStyles['tape--md']}>{ event.name }</Text>
+                          <Text style={sharedStyles['tape--sm']}>{ Moment(event.date).format('h:mm') } @ { event.venue.name }</Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
+                    </TouchableOpacity>
+                  );
+                })}
 
-            </View>
-          );
-        })}
+              </View>
+            );
+          })}
+        </ScrollView>
       </View>
     );
   }

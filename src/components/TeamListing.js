@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -36,24 +36,26 @@ class TeamListing extends React.Component {
 
     return (
       <View style={sharedStyles['fullsize']}>
-        <View style={componentStyles['persons']}>
-          {items.map((person, index) => {
-            return (
-              <TouchableOpacity
-                key={person.id}
-                style={componentStyles['person']}
-                onPress={() => { this.props.viewDetail(person.id); }}
-              >
-                <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={450} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
-                <View style={componentStyles['person__link']}>
-                  <View style={componentStyles['person__text']}>
-                    <Text style={sharedStyles['tape--md']}>{ person.name }</Text>
+        <ScrollView>
+          <View style={componentStyles['persons']}>
+            {items.map((person, index) => {
+              return (
+                <TouchableOpacity
+                  key={person.id}
+                  style={componentStyles['person']}
+                  onPress={() => { this.props.viewDetail(person.id); }}
+                >
+                  <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={450} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
+                  <View style={componentStyles['person__link']}>
+                    <View style={componentStyles['person__text']}>
+                      <Text style={sharedStyles['tape--md']}>{ person.name }</Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
       </View>
     );
   }

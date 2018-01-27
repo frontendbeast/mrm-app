@@ -60,7 +60,7 @@ export default class Page extends React.Component {
     const page = Object.assign({}, data, { image: image });
 
     return (
-      <View style={{flex: 1}}>
+      <View style={sharedStyles['fullsize']}>
         <ScrollView ref={ScrollView => this.scrollView = ScrollView}>
           <View key={id} style={[componentStyles['page-content']]}>
           {page.image ?

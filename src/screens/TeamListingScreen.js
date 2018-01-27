@@ -15,9 +15,7 @@ export default class TeamListingScreen extends React.Component {
     return (
       <View style={[sharedStyles['app'], sharedStyles['fullsize']]}>
         <Header/>
-        <ScrollView>
-          <TeamListingContainer/>
-        </ScrollView>
+        <TeamListingContainer/>
       </View>
     );
   }
