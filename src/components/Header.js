@@ -1,31 +1,46 @@
 import React from 'react';
-import { Image, TouchableOpacity, Text, View } from 'react-native';
+import { Image, Linking, TouchableOpacity, Text, View } from 'react-native';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import componentStyles from '../styles/header';
 
-const Header = ({ openDrawer, dismiss, title, back }) => (
 
-  <SafeAreaView style={componentStyles['header']}>
-    <View style={componentStyles['header__container']}>
-    {back ?
-      <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
-        <Image source={require('../assets/images/back-btn.png')} resizeMode="contain" />
-      </TouchableOpacity> :
-      <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
-        <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
-      </TouchableOpacity>
-    }
-    <View>
-      <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
-    </View>
-    <View style={componentStyles.header__spacer} />
-    </View>
-  </SafeAreaView>
-);
+class Header extends React.Component {
+  render () {
+    const { openDrawer, dismiss, title, back, settings } = this.props;
 
-const mapStateToProps = state => ({  });
+    const ticketsLink = (settings && settings.data && settings.data[Object.keys(settings.data)[0]].ticketsLink) ? settings.data[Object.keys(settings.data)[0]].ticketsLink : false;
+
+    return (
+      <SafeAreaView style={componentStyles['header']}>
+        <View style={componentStyles['header__container']}>
+          { back ?
+          <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
+            <Image source={require('../assets/images/back-btn.png')} resizeMode="contain" />
+          </TouchableOpacity> :
+          <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
+            <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
+          </TouchableOpacity>
+          }
+          <View>
+            <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
+          </View>
+        { ticketsLink ?
+          <TouchableOpacity style={componentStyles['header__tickets-button']} onPress={() => { Linking.openURL(ticketsLink); }}>
+            <Image source={require('../assets/images/tickets-btn.png')} resizeMode="contain" />
+          </TouchableOpacity> :
+          <View style={componentStyles.header__spacer} />
+        }
+        </View>
+      </SafeAreaView>
+    );
+  };
+}
+
+const mapStateToProps = state => ({
+  settings: state.settings,
+});
 
 const mapDispatchToProps = dispatch => ({
   openDrawer: () =>

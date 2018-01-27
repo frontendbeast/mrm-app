@@ -26,6 +26,12 @@ export default StyleSheet.create({
     height: 60,
   },
 
+  'header__tickets-button': {
+    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
+    flex: 1,
+  },
+
   'header__spacer': {
     alignSelf: 'flex-end',
     flex: 1,
