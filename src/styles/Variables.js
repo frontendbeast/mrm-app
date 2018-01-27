@@ -23,6 +23,8 @@ export const colors = {
 
   header: palette.black,
 
+  imageBG: palette.grey,
+
   tapeBG: palette.white,
   tapeText: palette.black,
   tapeInverseBG: palette.black,

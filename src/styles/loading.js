@@ -11,6 +11,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
+  'loading--img': {
+    backgroundColor: colors.imageBG,
+  },
+
   'loading__centered': {
     alignSelf: 'center',
   },

@@ -5,9 +5,18 @@ import componentStyles from '../styles/loading';
 
 export default class Loading extends React.Component {
   render() {
+    const { img } = this.props;
+
+    const image = (img) ? require('../assets/images/loading-img.gif') : require('../assets/images/loading.gif');
+    const styles = [componentStyles['loading']];
+
+    if (img) {
+      styles.push(componentStyles['loading--img']);
+    }
+
     return (
-      <View style={componentStyles['loading']}>
-        <Image source={require('../assets/images/loading.gif')} style={componentStyles['loading__centered']} resizeMode="contain" />
+      <View style={styles}>
+        <Image source={image} style={componentStyles['loading__centered']} resizeMode="contain" />
       </View>
     );
   }

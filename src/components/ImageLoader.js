@@ -5,6 +5,10 @@ import { CachedImage } from 'react-native-img-cache';
 
 import PropTypes from 'prop-types';
 
+import Loading from '../components/Loading';
+
+import  { colors } from '../styles/variables';
+
 export default class ImageLoader extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.string,
@@ -17,7 +21,7 @@ export default class ImageLoader extends React.Component {
   };
 
   static defaultProps = {
-    backgroundColor: '#666',
+    backgroundColor: colors.imageBG,
     height: 0,
     imgSize: 650,
     resizeMode: 'cover',
@@ -90,6 +94,7 @@ export default class ImageLoader extends React.Component {
 
     return (
       <View style={[{ backgroundColor: backgroundColor, aspectRatio: width/height, position: 'relative'}, style]}>
+        { this.state.opacityThumb < 1 ? <Loading img={true} /> : null }
         <AnimatedCachedImage style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} onLoad={this.onLoadThumb} blurRadius={1}/>
         <AnimatedCachedImage style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>
