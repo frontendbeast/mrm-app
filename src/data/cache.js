@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import VersionNumber from 'react-native-version-number';
 
 import database from './database';
 
@@ -30,7 +31,17 @@ const cache = {
 
   sync: async () => {
     const nextSyncToken = await _getItem('nextSyncToken');
-    const options = (nextSyncToken !== null) ? {'nextSyncToken': nextSyncToken} : {'initial': true};
+    const prevAppVersion = await _getItem('prevAppVersion');
+
+    const currentAppVersion = VersionNumber.appVersion;
+    const forceClear = (prevAppVersion === null || prevAppVersion !== currentAppVersion);
+    const options = {};
+
+    if (forceClear || nextSyncToken === null) {
+      options.initial = true;
+    } else {
+      options.nextSyncToken = nextSyncToken;
+    }
 
     const set = [];
     const types = [];
@@ -43,6 +54,15 @@ const cache = {
       database
         .sync(options)
         .then(async results => {
+          // If different app version
+          if (forceClear) {
+            // Clear all local data
+            // console.log('CLEAR ALL');
+            AsyncStorage.clear();
+          }
+
+          // console.log(results);
+
           // Process assets
           results.assets.forEach(asset => {
             // Keep track of content types to update indexes
@@ -121,6 +141,7 @@ const cache = {
 
               // Track sync
               update['nextSyncToken'] = results.nextSyncToken;
+              update['prevAppVersion'] = currentAppVersion;
 
               // Save to AsyncStorage
               Object.entries(update).forEach(([key, value]) => {

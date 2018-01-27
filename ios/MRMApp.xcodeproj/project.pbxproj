@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00BC89C3985149D2A5FBB9E9 /* ZillaSlab-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -30,6 +29,7 @@
 		9582EBC31F8D37320035154C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9582EBC11F8D37090035154C /* Crashlytics.framework */; };
 		9582EBC41F8D37320035154C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9582EBC01F8D37090035154C /* Fabric.framework */; };
 		CC481949D166458E87CA131D /* ZillaSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36769EFD494F4EBBAB04C377 /* ZillaSlab-Regular.ttf */; };
+		0AA1393EC65642EBBC26DBE8 /* libRNVersionNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CBF10FA4FE34C61A659A0C6 /* libRNVersionNumber.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -309,6 +309,8 @@
 		9582EBC11F8D37090035154C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C1E62308CD0046DEB7631ED7 /* ZillaSlab-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZillaSlab-Italic.ttf"; path = "../src/assets/fonts/ZillaSlab-Italic.ttf"; sourceTree = "<group>"; };
 		D34280F2BE544EDC85FF9377 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		B5EEAB3F2C394E96878AE4F4 /* RNVersionNumber.xcodeproj */ = {isa = PBXFileReference; name = "RNVersionNumber.xcodeproj"; path = "../node_modules/react-native-version-number/ios/RNVersionNumber.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		4CBF10FA4FE34C61A659A0C6 /* libRNVersionNumber.a */ = {isa = PBXFileReference; name = "libRNVersionNumber.a"; path = "libRNVersionNumber.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +340,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9582EBC31F8D37320035154C /* Crashlytics.framework in Frameworks */,
 				9582EBC41F8D37320035154C /* Fabric.framework in Frameworks */,
+				0AA1393EC65642EBBC26DBE8 /* libRNVersionNumber.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +506,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				D34280F2BE544EDC85FF9377 /* RNFetchBlob.xcodeproj */,
+				B5EEAB3F2C394E96878AE4F4 /* RNVersionNumber.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1017,12 +1021,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-version-number/ios",
 				);
 				INFOPLIST_FILE = MRMAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1044,12 +1050,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-version-number/ios",
 				);
 				INFOPLIST_FILE = MRMAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1080,6 +1088,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-version-number/ios",
 				);
 				INFOPLIST_FILE = MRMApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1113,6 +1122,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-version-number/ios",
 				);
 				INFOPLIST_FILE = MRMApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

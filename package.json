@@ -20,6 +20,7 @@
     "react-native-img-cache": "^1.5.3",
     "react-native-markdown-renderer": "^2.0.5",
     "react-native-simple-ptr": "git+https://github.com/frontendbeast/react-native-simple-ptr.git",
+    "react-native-version-number": "^0.3.0",
     "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
