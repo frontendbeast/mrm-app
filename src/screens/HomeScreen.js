@@ -8,6 +8,8 @@ import ImageLoader from '../components/ImageLoader';
 import Loading from '../components/Loading';
 import PagesContainer from '../containers/PagesContainer';
 
+import AdvertsHelper from '../helpers/AdvertsHelper';
+
 import sharedStyles from '../styles/shared';
 import advertStyles from '../styles/advert';
 import screenStyles from '../styles/homeScreen';
@@ -19,30 +21,6 @@ class HomeScreen extends React.Component {
 
   render() {
     const { adverts, assets, pages, settings } = this.props;
-
-    const advertsDisplayed = [];
-
-    const getAdvert = (type) => {
-      const advertsAll = Object.assign({}, adverts.data);
-      const advertsAvailable = Object
-        .keys(advertsAll)
-        .filter(id => !advertsDisplayed.includes(id))
-        .reduce((advert, id) => {
-          if (advertsAll[id].advertType.toLowerCase() === type) {
-            advert[id] = advertsAll[id];
-          }
-          return advert;
-        }, {});
-
-      if(!Object.keys(advertsAvailable).length) {
-        return false;
-      }
-
-      const randomKey = Object.keys(advertsAvailable)[Math.floor(Math.random()*Object.keys(advertsAvailable).length)];
-      advertsDisplayed.push(randomKey);
-
-      return randomKey;
-    };
 
     const renderAdvert = (id) => {
       const assetID = adverts.data[id].image;
@@ -81,6 +59,7 @@ class HomeScreen extends React.Component {
       );
     }
 
+    const advertsHelper = new AdvertsHelper(adverts.data);
     const advertSpacing = 4;
     const homeGrid = settings.data[Object.keys(settings.data)[0]].homeGrid;
 
@@ -97,12 +76,12 @@ class HomeScreen extends React.Component {
             const items = [renderGridItem(data, pageID, index)];
 
             if (index === 0 || index % advertSpacing == 0 && index !== homeGrid.length-1) {
-              const ad = getAdvert('banner');
+              const ad = advertsHelper.getAdvert('banner');
               if (ad) {
                 items.push(renderAdvert(ad));
               }
             } else if ( index === homeGrid.length-1 ) {
-              const ad = getAdvert('poster');
+              const ad = advertsHelper.getAdvert('poster');
               if (ad) {
                 items.push(renderAdvert(ad));
               }

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
+import AdvertsHelper from '../helpers/AdvertsHelper';
+
+import advertStyles from '../styles/advert';
 import componentStyles from '../styles/page';
 import sharedStyles from '../styles/shared';
 import markdownStyles from '../styles/markdown';
@@ -47,14 +50,29 @@ export default class Page extends React.Component {
   }
 
   render() {
-    const { assets, pages, id, title } = this.props;
+    const { adverts, assets, pages, id, title } = this.props;
 
-    if (!pages || !pages.data || !assets || !assets.data) {
+
+    const renderAdvert = (id) => {
+      const assetID = adverts.data[id].image;
+      const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
+      const aspectRatio = advert.image.file.details.image.width/advert.image.file.details.image.height;
+      return (
+        <TouchableOpacity key={id} onPress={() => { Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
+          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
+        </TouchableOpacity>
+      );
+    };
+
+    if (!adverts || !adverts.data || !assets || !assets.data || !pages || !pages.data) {
       return (
         <Loading />
       );
     }
 
+    const advertsHelper = new AdvertsHelper(adverts.data);
+
+    const ad = advertsHelper.getAdvert('poster');
     const data = pages.data[id];
     const image = assets.data[data.image];
     const page = Object.assign({}, data, { image: image });
@@ -83,6 +101,7 @@ export default class Page extends React.Component {
               <Markdown style={markdownStyles} rules={rules}>{page.copy}</Markdown>
             </View>
           </View>
+          {ad ? renderAdvert(ad) : null}
         </ScrollView>
       </View>
     );

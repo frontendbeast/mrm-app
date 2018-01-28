@@ -5,6 +5,7 @@ import Page from '../components/Page';
 
 function mapStateToProps(state) {
   return {
+    adverts: state.adverts,
     assets: state.assets,
     pages: state.pages,
   };
