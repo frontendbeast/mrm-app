@@ -20,6 +20,30 @@ class HomeScreen extends React.Component {
   render() {
     const { adverts, assets, pages, settings } = this.props;
 
+    const advertsDisplayed = [];
+
+    const getAdvert = (type) => {
+      const advertsAll = Object.assign({}, adverts.data);
+      const advertsAvailable = Object
+        .keys(advertsAll)
+        .filter(id => !advertsDisplayed.includes(id))
+        .reduce((advert, id) => {
+          if (advertsAll[id].advertType.toLowerCase() === type) {
+            advert[id] = advertsAll[id];
+          }
+          return advert;
+        }, {});
+
+      if(!Object.keys(advertsAvailable).length) {
+        return false;
+      }
+
+      const randomKey = Object.keys(advertsAvailable)[Math.floor(Math.random()*Object.keys(advertsAvailable).length)];
+      advertsDisplayed.push(randomKey);
+
+      return randomKey;
+    };
+
     const renderAdvert = (id) => {
       const assetID = adverts.data[id].image;
       const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
@@ -57,6 +81,7 @@ class HomeScreen extends React.Component {
       );
     }
 
+    const advertSpacing = 4;
     const homeGrid = settings.data[Object.keys(settings.data)[0]].homeGrid;
 
     return (
@@ -71,12 +96,16 @@ class HomeScreen extends React.Component {
 
             const items = [renderGridItem(data, pageID, index)];
 
-            if (index === 0) {
-              items.push(renderAdvert('1SblMH5T4MkCO4E0Gckg4w'));
-            } else if (index === 2) {
-              items.push(renderAdvert('3h6zuGqSROqEyw2IyCegOo'));
+            if (index === 0 || index % advertSpacing == 0 && index !== homeGrid.length-1) {
+              const ad = getAdvert('banner');
+              if (ad) {
+                items.push(renderAdvert(ad));
+              }
             } else if ( index === homeGrid.length-1 ) {
-              items.push(renderAdvert('GgXZ1SbXEWiMSK2gC2Wuk'));
+              const ad = getAdvert('poster');
+              if (ad) {
+                items.push(renderAdvert(ad));
+              }
             }
 
             return items;
