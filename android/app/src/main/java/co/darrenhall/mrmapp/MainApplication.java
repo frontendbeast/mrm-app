@@ -28,8 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNVersionNumberPackage(),
-            new RNFetchBlobPackage()
+          new RNVersionNumberPackage(),
+          new RNFetchBlobPackage()
       );
     }
   };
@@ -42,7 +42,9 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
     Fabric.with(this, new Crashlytics());
     SoLoader.init(this, /* native exopackage */ false);
   }
+
 }
