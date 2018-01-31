@@ -23,10 +23,16 @@ class Menu extends React.Component {
     this.props.onSync();
   }
 
-  render () {
-    const { closeDrawer, pages, settings } = this.props;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sync.error && !Object.keys(nextProps.settings.data).length) {
+      this.props.networkError();
+    }
+  }
 
-    if(!pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
+  render () {
+    const { closeDrawer, networkError, pages, settings, sync } = this.props;
+
+    if (!pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return null;
     }
 
@@ -69,6 +75,7 @@ const mapStateToProps = state => ({
   assets: state.assets,
   pages: state.pages,
   settings: state.settings,
+  sync: state.sync,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -90,6 +97,8 @@ const mapDispatchToProps = dispatch => ({
   },
   closeDrawer: () =>
     dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' })),
+  networkError: () =>
+    dispatch(NavigationActions.navigate({ routeName: 'Network Error' })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

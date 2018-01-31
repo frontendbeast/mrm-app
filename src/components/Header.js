@@ -10,7 +10,8 @@ class Header extends React.Component {
   render () {
     const { openDrawer, dismiss, title, back, settings } = this.props;
 
-    const ticketsLink = (settings && settings.data && settings.data[Object.keys(settings.data)[0]].ticketsLink) ? settings.data[Object.keys(settings.data)[0]].ticketsLink : false;
+    const ticketsLink = (settings && settings.data && Object.keys(settings.data).length && settings.data[Object.keys(settings.data)[0]].ticketsLink) ? settings.data[Object.keys(settings.data)[0]].ticketsLink : false;
+    const navButton = (settings && settings.data && Object.keys(settings.data).length);
 
     return (
       <SafeAreaView style={componentStyles['header']}>
@@ -18,11 +19,12 @@ class Header extends React.Component {
           { back ?
           <TouchableOpacity style={componentStyles['header__nav-button']} onPress={dismiss}>
             <Image source={require('../assets/images/back-btn.png')} resizeMode="contain" />
-          </TouchableOpacity> :
+          </TouchableOpacity> : navButton ?
           <TouchableOpacity style={componentStyles['header__nav-button']} onPress={openDrawer}>
             <Image source={require('../assets/images/nav-btn.png')} resizeMode="contain" />
-          </TouchableOpacity>
-          }
+          </TouchableOpacity> :
+          <View style={componentStyles['header__spacer-left']} />
+           }
           <View>
             <Image source={require('../assets/images/logo.png')} style={componentStyles['header__logo']} resizeMode="contain" />
           </View>
@@ -30,7 +32,7 @@ class Header extends React.Component {
           <TouchableOpacity style={componentStyles['header__tickets-button']} onPress={() => { Linking.openURL(ticketsLink); }}>
             <Image source={require('../assets/images/tickets-btn.png')} resizeMode="contain" />
           </TouchableOpacity> :
-          <View style={componentStyles.header__spacer} />
+          <View style={componentStyles['header__spacer-right']} />
         }
         </View>
       </SafeAreaView>

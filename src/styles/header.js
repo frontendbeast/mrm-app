@@ -32,9 +32,16 @@ export default StyleSheet.create({
     flex: 1,
   },
 
-  'header__spacer': {
+  'header__spacer-left': {
+    alignSelf: 'flex-start',
+    flex: 1,
+    height: 60,
+  },
+
+  'header__spacer-right': {
     alignSelf: 'flex-end',
     flex: 1,
+    height: 60,
   }
 
 });

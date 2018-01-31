@@ -38,7 +38,7 @@ class HomeScreen extends React.Component {
       const width = (index === 0) ? '100%' : '50%';
 
       const classGridItem = (index === 0) ? screenStyles['home-grid__item--feature'] : screenStyles['home-grid__item'];
-      const classGridText = (index === 0) ? sharedStyles['tape--lg'] : sharedStyles['tape--md'];
+      const classGridText = (index === 0) ? sharedStyles['tape--xl'] : sharedStyles['tape--md'];
 
       const imgOpacity = (index === 0) ? 1 : 0.7;
       const imgSize = (index === 0) ? 900 : 450;
@@ -53,9 +53,11 @@ class HomeScreen extends React.Component {
       );
     };
 
+    console.log(assets, pages, settings);
+
     if(!assets || !assets.data || !pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return (
-        <Loading />
+        <Loading textMain={'Loading content'} textSub={'Sorry it‘s taking a while'} />
       );
     }
 

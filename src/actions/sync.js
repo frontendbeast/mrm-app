@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 import actionTypes from '../constants/actionTypes';
 import cache from '../data/cache';
 

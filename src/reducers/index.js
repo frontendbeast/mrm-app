@@ -9,6 +9,7 @@ import navTeamReducer from './navTeamReducer';
 import pagesReducer from './pagesReducer';
 import personsReducer from './personsReducer';
 import settingsReducer from './settingsReducer';
+import syncReducer from './syncReducer';
 import venuesReducer from './venuesReducer';
 
 const reducers = combineReducers({
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   pages: pagesReducer,
   persons: personsReducer,
   settings: settingsReducer,
+  sync: syncReducer,
   venues: venuesReducer,
 });
 

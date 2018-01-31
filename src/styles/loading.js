@@ -19,4 +19,11 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
 
+  'loading__text': {
+    alignSelf: 'center',
+    height: 120,
+    justifyContent: 'space-between',
+    position: 'absolute',
+  }
+
 });

@@ -10,6 +10,7 @@ import Menu from '../components/Menu';
 import BrotherClubListingScreen from '../screens/BrotherClubListingScreen';
 import EventsScreen from '../screens/EventsScreen';
 import HomeScreen from '../screens/HomeScreen';
+import NetworkErrorScreen from '../screens/NetworkErrorScreen';
 import PageScreen from '../screens/PageScreen';
 import TeamScreen from '../screens/TeamScreen';
 
@@ -19,6 +20,7 @@ export const AppNavigator = DrawerNavigator({
   'Brother Clubs': { screen: BrotherClubListingScreen },
   'Events': { screen: EventsScreen },
   'Home': { screen: HomeScreen },
+  'Network Error': { screen: NetworkErrorScreen },
   'Page': { screen: PageScreen },
   'Team': { screen: TeamScreen },
 },{

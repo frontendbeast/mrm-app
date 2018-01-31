@@ -34,7 +34,14 @@ export default StyleSheet.create({
     letterSpacing: 1,
   },
 
-  'tape--lg': {
+  'subheading': {
+    color: colors.text,
+    fontFamily: 'BebasNeue',
+    fontSize: 24,
+    letterSpacing: 1,
+  },
+
+  'tape--xl': {
     alignSelf: 'center',
     backgroundColor: colors['tapeFeatureBG'],
     color: colors['tapeFeatureText'],
@@ -45,6 +52,19 @@ export default StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 14,
     paddingTop: 8,
+  },
+
+  'tape--lg': {
+    alignSelf: 'center',
+    backgroundColor: colors['tapeBG'],
+    color: colors['tapeText'],
+    fontFamily: 'BebasNeue',
+    fontSize: 30,
+    letterSpacing: 0.5,
+    paddingBottom: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 6,
   },
 
   'tape--md': {
