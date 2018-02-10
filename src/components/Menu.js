@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, SafeAreaView } from 'react-navigation';
+import { CachedImage } from 'react-native-img-cache';
 
 import { getAdverts } from '../actions/getAdverts';
 import { getAssets } from '../actions/getAssets';
@@ -13,6 +14,7 @@ import Header from '../components/Header';
 
 import actionTypes from '../constants/actionTypes';
 
+import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/menu';
 
@@ -33,9 +35,9 @@ class Menu extends React.Component {
   }
 
   render () {
-    const { closeDrawer, networkError, pages, settings, sync } = this.props;
+    const { assets, closeDrawer, networkError, pages, settings, sync } = this.props;
 
-    if (!pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
+    if (!assets || !assets.data || !pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return null;
     }
 
@@ -67,6 +69,17 @@ class Menu extends React.Component {
 
           return items;
         })}
+        </View>
+        <View style={{display: 'none'}}>
+          {Object.entries(assets.data).map(([id, image]) => {
+            console.log(`https:${image.file.url}?fm=jpg&q=15&w=${Math.ceil(dimensions.images.md/10)}`);
+            return (
+              <View key={id}>
+                <CachedImage style={{ height: 10, width: 10 }} source={{ uri: `https:${image.file.url}?fm=jpg&q=15&w=${Math.ceil(dimensions.images.md/10)}` }} />
+                <CachedImage style={{ height: 10, width: 10 }} source={{ uri: `https:${image.file.url}?fm=jpg&q=15&w=${Math.ceil(dimensions.images.lg/10)}` }} />
+              </View>
+            );
+          })}
         </View>
       </SafeAreaView>
     );

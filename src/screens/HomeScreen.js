@@ -12,6 +12,7 @@ import actionTypes from '../constants/actionTypes';
 
 import AdvertsHelper from '../helpers/AdvertsHelper';
 
+import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import advertStyles from '../styles/advert';
 import screenStyles from '../styles/homeScreen';
@@ -37,7 +38,7 @@ class HomeScreen extends React.Component {
 
       return (
         <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
-          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
+          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={dimensions.images.lg} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
       );
     };
@@ -50,7 +51,7 @@ class HomeScreen extends React.Component {
       const classGridText = (index === 0) ? sharedStyles['tape--xl'] : sharedStyles['tape--md'];
 
       const imgOpacity = (index === 0) ? 1 : 0.7;
-      const imgSize = (index === 0) ? 900 : 450;
+      const imgSize = (index === 0) ? dimensions.images.lg : dimensions.images.md;
 
       return (
         <TouchableOpacity key={id} onPress={() => { this.props.navigateTo(routeName, id); }} style={classGridItem}>

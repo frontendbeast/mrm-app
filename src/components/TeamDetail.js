@@ -8,6 +8,7 @@ import Loading from './Loading';
 
 import actionTypes from '../constants/actionTypes';
 
+import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/teamDetail';
 import markdownStyles from '../styles/markdown';
@@ -21,7 +22,7 @@ const rules = {
       </Text>
     </View>,
   img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} />;
+    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
   },
   p: (node, children, parent, styles) => {
     const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
@@ -63,7 +64,7 @@ class TeamDetail extends React.Component {
         <ScrollView>
           { person.photo ?
             <View style={{ aspectRatio: 1 }}>
-              <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={900} style={sharedStyles['absoluteCover']} resizeMode='cover' />
+              <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={dimensions.images.lg} style={sharedStyles['absoluteCover']} resizeMode='cover' />
             </View>
           : null }
           <View style={sharedStyles['container']}>

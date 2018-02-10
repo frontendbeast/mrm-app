@@ -8,6 +8,7 @@ import Moment from 'moment';
 import Loading from './Loading';
 import ImageLoader from './ImageLoader';
 
+import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/eventListing';
 
@@ -66,7 +67,7 @@ class EventListing extends React.Component {
                     >
                       <View style={componentStyles['event__link']}>
                         {event.imageListing ?
-                        <ImageLoader source={`https:${event.imageListing.file.url}`} height={event.imageListing.file.details.image.height} width={event.imageListing.file.details.image.height} imgSize={900} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
+                        <ImageLoader source={`https:${event.imageListing.file.url}`} height={event.imageListing.file.details.image.height} width={event.imageListing.file.details.image.height} imgSize={dimensions.images.lg} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
                         : <View style={componentStyles['event__separator']} /> }
                         <View style={componentStyles['event__text']}>
                           <Text style={sharedStyles['tape--md']}>{ event.name }</Text>

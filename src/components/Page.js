@@ -7,6 +7,7 @@ import Loading from './Loading';
 
 import AdvertsHelper from '../helpers/AdvertsHelper';
 
+import { dimensions } from '../styles/variables';
 import advertStyles from '../styles/advert';
 import componentStyles from '../styles/page';
 import sharedStyles from '../styles/shared';
@@ -21,7 +22,7 @@ const rules = {
       </Text>
     </View>,
   img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} />;
+    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
   },
   p: (node, children, parent, styles) => {
     const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
@@ -69,7 +70,7 @@ export default class Page extends React.Component {
 
       return (
         <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
-          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
+          <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={dimensions.images.lg} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
       );
     };
@@ -98,7 +99,7 @@ export default class Page extends React.Component {
                   <Text style={componentStyles['page-masthead__text']}>{page.title.toUpperCase()}</Text>
                 </View>
               </View>
-              <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} />
+              <ImageLoader source={`https:${page.image.file.url}`} width={page.image.file.details.image.width} height={page.image.file.details.image.height} imgSize={dimensions.images.lg} />
             </View>
           : null}
             <View style={sharedStyles['container']}>

@@ -40,4 +40,8 @@ export const colors = {
 export const dimensions = {
   fontSizeHeader: 16,
   gutter: 16,
+  images: {
+    lg: 900,
+    md: 450,
+  }
 };

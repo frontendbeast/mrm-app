@@ -41,7 +41,7 @@ export default class ImageLoader extends React.Component {
       width: this.props.width,
     };
 
-    this.imgSizeThumb = (this.imgSizeThumb <= 500) ? Math.round(this.props.imgSize/10) : Math.round(this.props.imgSize/20);
+    this.imgSizeThumb = Math.ceil(this.props.imgSize/10);
   }
 
   componentDidMount() {
@@ -95,8 +95,8 @@ export default class ImageLoader extends React.Component {
     return (
       <View style={[{ backgroundColor: backgroundColor, aspectRatio: width/height, position: 'relative'}, style]}>
         <Loading img={true} />
-        <AnimatedCachedImage style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=40&w=${this.imgSizeThumb}` }} onLoad={this.onLoadThumb} blurRadius={2}/>
-        <AnimatedCachedImage style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=70&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
+        <AnimatedCachedImage style={[styles['image'], {opacity: opacityThumb}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=15&w=${this.imgSizeThumb}` }} onLoad={this.onLoadThumb} blurRadius={3}/>
+        <AnimatedCachedImage style={[styles['image'], {opacity: opacityLarge}]} resizeMode={resizeMode} source={{ uri: `${source}?fm=jpg&q=50&w=${imgSize}` }} onLoad={this.onLoadLarge}/>
       </View>
     );
   }

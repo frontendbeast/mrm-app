@@ -8,6 +8,7 @@ import Loading from './Loading';
 
 import actionTypes from '../constants/actionTypes';
 
+import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/teamListing';
 
@@ -48,7 +49,7 @@ class TeamListing extends React.Component {
                   style={componentStyles['person']}
                   onPress={() => { this.props.viewDetail(person.id); }}
                 >
-                  <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={450} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
+                  <ImageLoader source={`https:${person.photo.file.url}`} height={person.photo.file.details.image.height} width={person.photo.file.details.image.height} imgSize={dimensions.images.md} style={[sharedStyles['absolute-cover'], {opacity: 0.7}]} resizeMode='cover' />
                   <View style={componentStyles['person__link']}>
                     <View style={componentStyles['person__text']}>
                       <Text style={sharedStyles['tape--md']}>{ person.name }</Text>

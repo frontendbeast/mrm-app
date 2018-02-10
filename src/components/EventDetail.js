@@ -9,6 +9,7 @@ import ImageLoader from './ImageLoader';
 
 import actionTypes from '../constants/actionTypes';
 
+import { dimensions } from '../styles/variables';
 import componentStyles from '../styles/eventDetail';
 import sharedStyles from '../styles/shared';
 import markdownStyles from '../styles/markdown';
@@ -22,7 +23,7 @@ const rules = {
       </Text>
     </View>,
   img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} />;
+    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
   },
   p: (node, children, parent, styles) => {
     const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
@@ -64,7 +65,7 @@ class EventDetail extends React.Component {
       <View style={sharedStyles['fullsize']}>
         <ScrollView>
           {event.imageDetail ?
-          <ImageLoader source={`https:${event.imageDetail.file.url}`} height={event.imageDetail.file.details.image.height} width={event.imageDetail.file.details.image.height} imgSize={900} resizeMode='cover' />
+          <ImageLoader source={`https:${event.imageDetail.file.url}`} height={event.imageDetail.file.details.image.height} width={event.imageDetail.file.details.image.height} imgSize={dimensions.images.lg} resizeMode='cover' />
           : null }
           <View style={sharedStyles['container']}>
             <Text style={[sharedStyles['heading'], componentStyles['event__name']]}>{ event.name }</Text>
