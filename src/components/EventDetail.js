@@ -1,42 +1,19 @@
 import React from 'react';
 import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
-
+import Markdown from 'react-native-markdown-renderer';
 import Moment from 'moment';
 
 import ImageLoader from './ImageLoader';
 
 import actionTypes from '../constants/actionTypes';
 
+import MarkdownHelper from '../helpers/MarkdownHelper';
+
 import { dimensions } from '../styles/variables';
 import componentStyles from '../styles/eventDetail';
 import sharedStyles from '../styles/shared';
 import markdownStyles from '../styles/markdown';
-
-const rules = {
-  blockquote: (node, children, parent, styles) =>
-    <View key={getUniqueID()} style={[markdownStyles.blockquote]}>
-      <Image source={require('../assets/images/quote.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
-      <Text style={[markdownStyles.blockquoteText]}>
-        {children}
-      </Text>
-    </View>,
-  img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
-  },
-  p: (node, children, parent, styles) => {
-    const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
-
-    return (children[0].type.displayName === 'Text' ?
-    <Text key={getUniqueID()} style={style}>
-      {children}
-    </Text> :
-    <View key={getUniqueID()} style={[markdownStyles.block]}>
-      {children}
-    </View>);
-  },
-};
 
 class EventDetail extends React.Component {
   constructor(props) {
@@ -57,6 +34,8 @@ class EventDetail extends React.Component {
       return null;
     }
 
+    const markdownHelper = new MarkdownHelper(assets.data, componentStyles);
+
     const venue = venues.data[events.data[id].venue];
     const imageDetail = assets.data[events.data[id].imageDetail];
     const event = Object.assign({}, events.data[id], { venue, imageDetail });
@@ -76,7 +55,7 @@ class EventDetail extends React.Component {
               { event.dressCode ? <Text style={[sharedStyles['tape--sm'], sharedStyles['tape--sm--inverse'], componentStyles['event__meta-item']]}>{ event.dressCode }</Text> : null }
             </View> : null }
             { event.details ?
-            <Markdown style={markdownStyles} rules={rules}>{event.details}</Markdown>
+            <Markdown style={markdownStyles} rules={markdownHelper.getRules()}>{event.details}</Markdown>
             : null }
             { event.venue.location ?
             <View>

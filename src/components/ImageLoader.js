@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import Loading from '../components/Loading';
 
-import  { colors } from '../styles/variables';
+import  { colors, dimensions } from '../styles/variables';
 
 export default class ImageLoader extends React.Component {
   static propTypes = {
@@ -56,6 +56,13 @@ export default class ImageLoader extends React.Component {
           this.setState({
             height: height,
             width: width,
+          });
+        }
+      }, (error) => {
+        if (this._isMounted) {
+          this.setState({
+            height: dimensions.images.lg,
+            width: dimensions.images.lg,
           });
         }
       });

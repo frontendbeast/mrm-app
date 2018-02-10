@@ -1,41 +1,18 @@
 import React from 'react';
 import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
+import Markdown from 'react-native-markdown-renderer';
 
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
 import AdvertsHelper from '../helpers/AdvertsHelper';
+import MarkdownHelper from '../helpers/MarkdownHelper';
 
 import { dimensions } from '../styles/variables';
 import advertStyles from '../styles/advert';
 import componentStyles from '../styles/page';
 import sharedStyles from '../styles/shared';
 import markdownStyles from '../styles/markdown';
-
-const rules = {
-  blockquote: (node, children, parent, styles) =>
-    <View key={getUniqueID()} style={[markdownStyles.blockquote]}>
-      <Image source={require('../assets/images/quote.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
-      <Text style={[markdownStyles.blockquoteText]}>
-        {children}
-      </Text>
-    </View>,
-  img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
-  },
-  p: (node, children, parent, styles) => {
-    const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
-
-    return (children[0].type.displayName === 'Text' ?
-    <Text key={getUniqueID()} style={style}>
-      {children}
-    </Text> :
-    <View key={getUniqueID()} style={[markdownStyles.block]}>
-      {children}
-    </View>);
-  },
-};
 
 export default class Page extends React.Component {
   constructor(props) {
@@ -60,7 +37,6 @@ export default class Page extends React.Component {
   render() {
     const { adverts, assets, onTrackAdvertClick, onTrackAdvertView, pages, id } = this.props;
 
-
     const renderAdvert = (id) => {
       const assetID = adverts.data[id].image;
       const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
@@ -82,6 +58,7 @@ export default class Page extends React.Component {
     }
 
     const advertsHelper = new AdvertsHelper(adverts.data);
+    const markdownHelper = new MarkdownHelper(assets.data, componentStyles);
 
     const ad = advertsHelper.getAdvert('poster');
     const data = pages.data[id];
@@ -109,7 +86,7 @@ export default class Page extends React.Component {
                   <Text style={[markdownStyles.blockquoteText, markdownStyles.blockquoteTextAlt]}>{page.intro}</Text>
                 </View>
               : null}
-              <Markdown style={markdownStyles} rules={rules}>{page.copy}</Markdown>
+              <Markdown style={markdownStyles} rules={markdownHelper.getRules()}>{page.copy}</Markdown>
             </View>
           </View>
           {ad ? renderAdvert(ad) : null}

@@ -1,41 +1,19 @@
 import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
+import Markdown from 'react-native-markdown-renderer';
 
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
 import actionTypes from '../constants/actionTypes';
 
+import MarkdownHelper from '../helpers/MarkdownHelper';
+
 import { dimensions } from '../styles/variables';
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/teamDetail';
 import markdownStyles from '../styles/markdown';
-
-const rules = {
-  blockquote: (node, children, parent, styles) =>
-    <View key={getUniqueID()} style={[markdownStyles.blockquote]}>
-      <Image source={require('../assets/images/quote.png')} style={markdownStyles.blockquoteImg} resizeMode="contain" />
-      <Text style={[markdownStyles.blockquoteText]}>
-        {children}
-      </Text>
-    </View>,
-  img: (node, children, parent, styles) => {
-    return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={componentStyles['page-image']} imgSize={dimensions.images.lg} />;
-  },
-  p: (node, children, parent, styles) => {
-    const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
-
-    return (children[0].type.displayName === 'Text' ?
-    <Text key={getUniqueID()} style={style}>
-      {children}
-    </Text> :
-    <View key={getUniqueID()} style={[markdownStyles.block]}>
-      {children}
-    </View>);
-  },
-};
 
 class TeamDetail extends React.Component {
   constructor(props) {
@@ -56,6 +34,8 @@ class TeamDetail extends React.Component {
       return <Loading />;
     }
 
+    const markdownHelper = new MarkdownHelper(assets.data, componentStyles);
+
     const photo = assets.data[persons.data[id].photo];
     const person = Object.assign({}, persons.data[id], { photo });
 
@@ -70,7 +50,7 @@ class TeamDetail extends React.Component {
           <View style={sharedStyles['container']}>
             <Text style={[sharedStyles['heading'], componentStyles['person__name']]}>{ person.name }</Text>
             { person.biography ?
-            <Markdown style={markdownStyles} rules={rules}>{person.biography}</Markdown>
+            <Markdown style={markdownStyles} rules={markdownHelper.getRules()}>{person.biography}</Markdown>
             : null }
           </View>
         </ScrollView>

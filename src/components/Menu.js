@@ -72,7 +72,6 @@ class Menu extends React.Component {
         </View>
         <View style={{display: 'none'}}>
           {Object.entries(assets.data).map(([id, image]) => {
-            console.log(`https:${image.file.url}?fm=jpg&q=15&w=${Math.ceil(dimensions.images.md/10)}`);
             return (
               <View key={id}>
                 <CachedImage style={{ height: 10, width: 10 }} source={{ uri: `https:${image.file.url}?fm=jpg&q=15&w=${Math.ceil(dimensions.images.md/10)}` }} />
