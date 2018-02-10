@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import componentStyles from '../styles/header';
 
-
 class Header extends React.Component {
   render () {
     const { openDrawer, dismiss, title, back, settings } = this.props;

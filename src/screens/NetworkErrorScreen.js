@@ -28,8 +28,6 @@ class NetworkErrorScreen extends React.Component {
   render() {
     const { sync, onSync } = this.props;
 
-    console.log(sync);
-
     if(sync && sync.loading) {
       return (
         <Loading textMain={'Loading content'} textSub={'Sorry it‘s taking a while'} />

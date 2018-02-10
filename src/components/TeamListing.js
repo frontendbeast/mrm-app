@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
+import actionTypes from '../constants/actionTypes';
+
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/teamListing';
 
@@ -16,6 +18,7 @@ class TeamListing extends React.Component {
 
   componentWillMount() {
     this.props.onGetPersons();
+    this.props.onTrackScreenView('Team');
   }
 
   render() {
@@ -69,6 +72,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   viewDetail: (id) =>
     dispatch(NavigationActions.navigate({ routeName: 'TeamDetail', params: { id: id } })),
+    onTrackScreenView: (screen) => dispatch({ type: actionTypes.TrackScreenView, screen }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamListing);

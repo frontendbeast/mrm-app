@@ -6,6 +6,8 @@ import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 import ImageLoader from './ImageLoader';
 import Loading from './Loading';
 
+import actionTypes from '../constants/actionTypes';
+
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/teamDetail';
 import markdownStyles from '../styles/markdown';
@@ -37,6 +39,13 @@ const rules = {
 class TeamDetail extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    const { persons, id, onTrackScreenView } = this.props;
+    const person = persons.data[id];
+
+    onTrackScreenView(`Team > ${person.name}`);
   }
 
   render() {
@@ -74,6 +83,8 @@ const mapStateToProps = state => ({
   persons: state.persons
 });
 
-const mapDispatchToProps = dispatch => ({  });
+const mapDispatchToProps = dispatch => ({
+  onTrackScreenView: (screen) => dispatch({ type: actionTypes.TrackScreenView, screen }),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamDetail);

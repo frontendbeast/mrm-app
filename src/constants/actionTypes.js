@@ -34,6 +34,11 @@ const actionTypes = {
   SyncRequested: 'SYNC_REQUESTED',
   SyncRejected: 'SYNC_REJECTED',
   SyncFulfilled: 'SYNC_FULFILLED',
+
+  TrackAdvertClick: 'TRACK_ADVERT_CLICK',
+  TrackAdvertView: 'TRACK_ADVERT_VIEW',
+  TrackException: 'TRACK_EXCEPTION',
+  TrackScreenView: 'TRACK_SCREEN_VIEW',
 };
 
 export default actionTypes;

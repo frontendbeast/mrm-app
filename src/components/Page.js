@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Markdown, { getUniqueID } from 'react-native-markdown-renderer';
 
 import ImageLoader from './ImageLoader';
@@ -43,6 +43,13 @@ export default class Page extends React.Component {
     this.scrollView;
   }
 
+  componentDidMount() {
+    const { pages, id, onTrackScreenView } = this.props;
+    const page = pages.data[id];
+
+    onTrackScreenView(page.title);
+  }
+
   componentDidUpdate() {
     if(this.scrollView) {
       this.scrollView.scrollTo({x: 0, y: 0, animated: false});
@@ -50,15 +57,18 @@ export default class Page extends React.Component {
   }
 
   render() {
-    const { adverts, assets, pages, id, title } = this.props;
+    const { adverts, assets, onTrackAdvertClick, onTrackAdvertView, pages, id } = this.props;
 
 
     const renderAdvert = (id) => {
       const assetID = adverts.data[id].image;
       const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
       const aspectRatio = advert.image.file.details.image.width/advert.image.file.details.image.height;
+
+      onTrackAdvertView(advert.title);
+
       return (
-        <TouchableOpacity key={id} onPress={() => { Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
+        <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
           <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
       );

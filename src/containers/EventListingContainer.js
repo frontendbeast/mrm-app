@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 
 import { getEvents } from '../actions/getEvents';
 import { getVenues } from '../actions/getVenues';
+
 import EventListing from '../components/EventListing';
+
+import actionTypes from '../constants/actionTypes';
 
 function mapStateToProps(state) {
   return {
@@ -16,6 +19,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onGetEvents: () => dispatch(getEvents()),
     onGetVenues: () => dispatch(getVenues()),
+    onTrackScreenView: (screen) => dispatch({ type: actionTypes.TrackScreenView, screen }),
    };
 }
 

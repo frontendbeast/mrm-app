@@ -8,6 +8,8 @@ import ImageLoader from '../components/ImageLoader';
 import Loading from '../components/Loading';
 import PagesContainer from '../containers/PagesContainer';
 
+import actionTypes from '../constants/actionTypes';
+
 import AdvertsHelper from '../helpers/AdvertsHelper';
 
 import sharedStyles from '../styles/shared';
@@ -19,15 +21,22 @@ class HomeScreen extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.onTrackScreenView('Home');
+  }
+
   render() {
-    const { adverts, assets, pages, settings } = this.props;
+    const { adverts, assets, onTrackAdvertClick, onTrackAdvertView, pages, settings } = this.props;
 
     const renderAdvert = (id) => {
       const assetID = adverts.data[id].image;
       const advert = Object.assign({}, adverts.data[id], { image: assets.data[assetID] });
       const aspectRatio = advert.image.file.details.image.width/advert.image.file.details.image.height;
+
+      setTimeout(() => { onTrackAdvertView(advert.title); }, 100);
+
       return (
-        <TouchableOpacity key={id} onPress={() => { Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
+        <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
           <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={900} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
       );
@@ -52,8 +61,6 @@ class HomeScreen extends React.Component {
         </TouchableOpacity>
       );
     };
-
-    console.log(assets, pages, settings);
 
     if(!assets || !assets.data || !pages || !pages.data || !settings || !settings.data || !Object.keys(settings.data).length) {
       return (
@@ -117,6 +124,9 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(NavigationActions.navigate(options));
   },
+  onTrackScreenView: (screen) => dispatch({ type: actionTypes.TrackScreenView, screen }),
+  onTrackAdvertView: (advert) => dispatch({ type: actionTypes.TrackAdvertView, advert }),
+  onTrackAdvertClick: (advert) => dispatch({ type: actionTypes.TrackAdvertClick, advert }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

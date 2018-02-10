@@ -19,6 +19,7 @@ class EventListing extends React.Component {
   componentWillMount() {
     this.props.onGetEvents();
     this.props.onGetVenues();
+    this.props.onTrackScreenView('Events');
   }
 
   render() {

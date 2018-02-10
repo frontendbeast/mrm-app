@@ -11,6 +11,8 @@ import { sync } from '../actions/sync';
 
 import Header from '../components/Header';
 
+import actionTypes from '../constants/actionTypes';
+
 import sharedStyles from '../styles/shared';
 import componentStyles from '../styles/menu';
 
@@ -25,6 +27,7 @@ class Menu extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.sync.error && !Object.keys(nextProps.settings.data).length) {
+      this.props.onTrackException('Network error before initial content download');
       this.props.networkError();
     }
   }
@@ -99,6 +102,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' })),
   networkError: () =>
     dispatch(NavigationActions.navigate({ routeName: 'Network Error' })),
+  onTrackException: (screen) => dispatch({ type: actionTypes.TrackException, exception }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

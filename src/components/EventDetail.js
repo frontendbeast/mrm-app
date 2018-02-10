@@ -7,6 +7,8 @@ import Moment from 'moment';
 
 import ImageLoader from './ImageLoader';
 
+import actionTypes from '../constants/actionTypes';
+
 import componentStyles from '../styles/eventDetail';
 import sharedStyles from '../styles/shared';
 import markdownStyles from '../styles/markdown';
@@ -38,6 +40,13 @@ const rules = {
 class EventDetail extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    const { events, id, onTrackScreenView } = this.props;
+    const event = events.data[id];
+
+    onTrackScreenView(`Events > ${event.name}`);
   }
 
   render() {
@@ -90,7 +99,7 @@ const mapStateToProps = state => ({
  });
 
 const mapDispatchToProps = dispatch => ({
-
+  onTrackScreenView: (screen) => dispatch({ type: actionTypes.TrackScreenView, screen }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventDetail);
