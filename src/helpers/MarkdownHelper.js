@@ -24,13 +24,13 @@ export default class MarkdownHelper {
         </View>,
       img: (node, children, parent, styles) => {
         const asset = Object.entries(this.assets).filter(([id, image]) => {
-          return `https:${image.file.url}` === node.attributes.src;
+          return image.file.url === node.attributes.src;
         });
 
         const height = (asset.length) ? asset[0][1].file.details.image.height : null;
         const width = (asset.length) ? asset[0][1].file.details.image.width : null;
 
-        return <ImageLoader key={getUniqueID()} source={node.attributes.src} style={this.componentStyles['page-image']} height={height} width={width} imgSize={dimensions.images.lg} />;
+        return <ImageLoader key={getUniqueID()} source={`https:${node.attributes.src}`} style={this.componentStyles['page-image']} height={height} width={width} imgSize={dimensions.images.lg} />;
       },
       p: (node, children, parent, styles) => {
         const style = (parent.length && parent[0].type === 'blockquote') ? [] : [markdownStyles.paragraph];
