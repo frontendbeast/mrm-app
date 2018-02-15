@@ -55,7 +55,9 @@ class HomeScreen extends React.Component {
 
       return (
         <TouchableOpacity key={id} onPress={() => { this.props.navigateTo(routeName, id); }} style={classGridItem}>
+          { page.image ?
           <ImageLoader source={`https:${page.image.file.url}`} height={page.image.file.details.image.height} width={page.image.file.details.image.height} imgSize={imgSize} style={[sharedStyles['absolute-cover'], {opacity: imgOpacity}]} resizeMode='cover' />
+          : null }
           <View>
             <Text style={classGridText}>{page.title}</Text>
           </View>
