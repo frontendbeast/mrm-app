@@ -36,11 +36,11 @@ class HomeScreen extends React.Component {
 
       setTimeout(() => { onTrackAdvertView(advert.title); }, 100);
 
-      return (
+      return assets.data[assetID] ? (
         <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
           <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={dimensions.images.lg} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
-      );
+      ) : null;
     };
 
     const renderGridItem = (page, id, index) => {

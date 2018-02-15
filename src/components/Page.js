@@ -44,11 +44,11 @@ export default class Page extends React.Component {
 
       onTrackAdvertView(advert.title);
 
-      return (
+      return assets.data[assetID] ? (
         <TouchableOpacity key={id} onPress={() => { onTrackAdvertClick(advert.title); Linking.openURL(advert.link); }} style={[advertStyles['advert--banner'], { aspectRatio }]}>
           <ImageLoader source={`https:${advert.image.file.url}`} height={advert.image.file.details.image.height} width={advert.image.file.details.image.width} imgSize={dimensions.images.lg} style={sharedStyles['absolute-cover']} resizeMode='cover' />
         </TouchableOpacity>
-      );
+      ) : null;
     };
 
     if (!adverts || !adverts.data || !assets || !assets.data || !pages || !pages.data) {
